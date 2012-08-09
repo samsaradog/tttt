@@ -34,7 +34,7 @@ public:
 protected:
 
   static Mapper  	mapper_m;
-  static FindWinner	finder_m;
+  static FindWinner*	finder_m_p;
   Step* next_m_p;
 };
 

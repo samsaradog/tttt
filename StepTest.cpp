@@ -1,7 +1,5 @@
 // file StepTest.cpp
 
-#include <iostream>
-
 #include <cppunit/config/SourcePrefix.h>
 #include "StepTest.h"
 #include "StepFactory.h"

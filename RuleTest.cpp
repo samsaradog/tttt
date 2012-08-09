@@ -1,7 +1,5 @@
 // file RuleTest.cpp
 
-#include <iostream>
-
 #include <cppunit/config/SourcePrefix.h>
 #include "RuleTest.h"
 #include "RuleFactory.h"

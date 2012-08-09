@@ -1,7 +1,6 @@
 // file View.cpp
 
 #include <cctype>
-#include <iostream>
 //#include <cstdlib>
 
 #include "Controller.h"

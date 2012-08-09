@@ -4,7 +4,6 @@
 #include "Game.h"
 
 #include <algorithm>
-#include <iostream>
 
 //---------------------------------------------------------------
 

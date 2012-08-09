@@ -11,6 +11,7 @@
 
 #include "Game.h"
 #include "Player.h"
+#include "Destroyer.h"
 
 #include <set>
 #include <vector>
@@ -18,12 +19,13 @@
 typedef set<IntSet> IntSetSet;
 typedef vector<IntSetSet> IntSetSetVector;
 
+// We want this class to be a singleton, since
+// we'll need it a lot in the tree.
+
 class FindWinner
 {
-
 public:
-  FindWinner();
-  ~FindWinner();
+  static FindWinner* Instance();
 
   bool hasWinner(const Player* player_p) const;
 
@@ -31,11 +33,19 @@ public:
   int winningMove(const Game* game_p, const Player* player_p) const;
 
 private:
+  FindWinner();
+  ~FindWinner();
+
+  friend class Destroyer<FindWinner>;
+
   IntSetSet winningMoves_m;
   IntSetSetVector blockedMoves_m;
 
   void buildWinningMovesSet();
   void buildBlockedMovesVector();
+
+  static FindWinner* instance_m_p;
+  static Destroyer<FindWinner> destroyer_m;
 };
 
 #endif // FIND_WINNER_H

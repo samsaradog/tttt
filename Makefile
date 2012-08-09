@@ -9,9 +9,9 @@
 CFLAGS?= -Wall 
 LFLAGS?= 
 
-TESTAPP = ttttest
-APP = ttt
-MAINOBJ = ttt.o
+TESTAPP = tttttest
+APP = tttt
+MAINOBJ = tttt.o
 OBJS =  Mapper.o Game.o FindWinner.o Player.o View.o RuleFactory.o Rules.o Controller.o StepFactory.o Steps.o
 TESTOBJS = Main.o MapTest.o GameTest.o FindWinnerTest.o ViewTest.o PlayerTest.o RuleTest.o ControllerTest.o StepTest.o
 
@@ -31,7 +31,7 @@ $(APP): $(OBJS) $(MAINOBJ)
 .cpp.o:
 	g++ -c $(CFLAGS) $<
 
-ttt.o: ttt.cpp $(OBJS)
+tttt.o: tttt.cpp $(OBJS)
 Mapper.o: Mapper.cpp Mapper.h
 Game.o: Game.cpp Game.h
 FindWinner.o: FindWinner.cpp FindWinner.h

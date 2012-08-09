@@ -10,7 +10,7 @@
 // Declare the static members of Step
 
 Mapper Step::mapper_m;
-FindWinner Step::finder_m;
+FindWinner* Step::finder_m_p = FindWinner::Instance();
 
 //---------------------------------------------------------------
 
@@ -59,7 +59,7 @@ bool Step2::makeMove(int human_move,
 
   game_p->addMove(human_move, human_p);
 
-  if ( finder_m.hasWinner(human_p) )
+  if ( finder_m_p->hasWinner(human_p) )
   {
     message += "The Human has won. Congratulations!\n";
     return_value = false;
@@ -111,7 +111,7 @@ bool Step4::makeMove(int human_move,
 {
   bool return_value = false;
 
-  int computer_move = finder_m.winningMove(game_p, computer_p);
+  int computer_move = finder_m_p->winningMove(game_p, computer_p);
 
   if ( 0 <= computer_move )
   {
@@ -140,7 +140,7 @@ bool Step5::makeMove(int human_move,
 {
   bool return_value = false;
 
-  int computer_move = finder_m.winningMove(game_p, human_p);
+  int computer_move = finder_m_p->winningMove(game_p, human_p);
 
   if ( 0 <= computer_move )
   {

@@ -5,6 +5,15 @@
 
 #include <algorithm>
 
+//---------------------------------------------------------------
+
+// Define class static variables
+
+FindWinner* FindWinner::instance_m_p = 0;
+Destroyer<FindWinner> FindWinner::destroyer_m;
+
+//---------------------------------------------------------------
+
 // Array to define what sets of moves win a game
 
 const int WINNER_ARRAY_COLS = 3;
@@ -61,6 +70,19 @@ FindWinner::FindWinner()
 
 FindWinner::~FindWinner()
 {
+}
+
+//---------------------------------------------------------------
+
+FindWinner* FindWinner::Instance()
+{
+  if ( NULL == instance_m_p )
+  {
+    instance_m_p = new FindWinner();
+    destroyer_m.SetDoomed(instance_m_p);
+  }
+
+  return instance_m_p;
 }
 
 //---------------------------------------------------------------

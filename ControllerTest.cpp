@@ -1,7 +1,5 @@
 // file ControllerTest.cpp
 
-#include <iostream>
-
 #include <cppunit/config/SourcePrefix.h>
 #include "ControllerTest.h"
 

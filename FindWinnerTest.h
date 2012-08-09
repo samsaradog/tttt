@@ -24,7 +24,10 @@ class FindWinnerTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST_SUITE_END();
 
 public:
-  FindWinnerTest() : human_m(), computer_m(), game_m(&human_m, &computer_m) {};
+  FindWinnerTest() : human_m(), computer_m(), 
+                     game_m(&human_m, &computer_m),
+                     finder_m_p(FindWinner::Instance()) {};
+
   ~FindWinnerTest() {};
 
   void setUp();
@@ -45,7 +48,7 @@ private:
 
   Game       game_m;
 
-  FindWinner finder_m;
+  FindWinner* finder_m_p;
 };
 
 
