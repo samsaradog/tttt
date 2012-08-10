@@ -19,12 +19,16 @@ class Game
 {
 
 public:
-  Game(Player* human_p, Player* computer_p);
+  Game();
   ~Game();
 
-  void reset(Player* human_p, Player* computer_p) throw();
+  void reset() throw();
 
-  void addMove(int move, Player* player_p) throw (invalid_argument);
+  void addHumanMove(int move)    throw (invalid_argument);
+  void addComputerMove(int move) throw (invalid_argument);
+
+  const Player* getHuman()    { return &human_m; };
+  const Player* getComputer() { return &computer_m; };
 
   // Returns whether any move is available
   bool moveAvailable() const;
@@ -38,6 +42,9 @@ public:
 private:
 
   IntSet availableMoves_m;
+
+  Player human_m;
+  Player computer_m;
 
   // Throws an exception if the move is not available
   void checkAvailableMoves(int move) throw (invalid_argument);

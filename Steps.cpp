@@ -18,8 +18,6 @@ FindWinner* Step::finder_m_p = FindWinner::Instance();
 
 bool Step1::makeMove(int human_move,
                      string& message,
-                     Player* human_p, 
-                     Player* computer_p,
                      Game*   game_p)
 {
 
@@ -38,8 +36,7 @@ bool Step1::makeMove(int human_move,
   }
   else if ( NULL != next_m_p )
   {
-    return_value = next_m_p->makeMove(human_move, message, 
-                                      human_p, computer_p, game_p);
+    return_value = next_m_p->makeMove(human_move, message, game_p);
   }
 
   return return_value;
@@ -51,23 +48,20 @@ bool Step1::makeMove(int human_move,
 
 bool Step2::makeMove(int human_move,
                      string& message,
-                     Player* human_p, 
-                     Player* computer_p,
                      Game*   game_p)
 {
   bool return_value = false;
 
-  game_p->addMove(human_move, human_p);
+  game_p->addHumanMove(human_move);
 
-  if ( finder_m_p->hasWinner(human_p) )
+  if ( finder_m_p->hasWinner(game_p->getHuman()) )
   {
     message += "The Human has won. Congratulations!\n";
     return_value = false;
   }
   else if ( NULL != next_m_p )
   {
-    return_value = next_m_p->makeMove(human_move, message, 
-                                      human_p, computer_p, game_p);
+    return_value = next_m_p->makeMove(human_move, message, game_p);
   }
 
   return return_value;
@@ -80,8 +74,6 @@ bool Step2::makeMove(int human_move,
 
 bool Step3::makeMove(int human_move,
                      string& message,
-                     Player* human_p, 
-                     Player* computer_p,
                      Game*   game_p)
 {
   bool return_value = false;
@@ -92,8 +84,7 @@ bool Step3::makeMove(int human_move,
   }
   else if ( NULL != next_m_p )
   {
-    return_value = next_m_p->makeMove(human_move, message, 
-                                      human_p, computer_p, game_p);
+    return_value = next_m_p->makeMove(human_move, message, game_p);
   }
 
   return return_value;
@@ -105,23 +96,21 @@ bool Step3::makeMove(int human_move,
 
 bool Step4::makeMove(int human_move,
                      string& message,
-                     Player* human_p, 
-                     Player* computer_p,
                      Game*   game_p)
 {
   bool return_value = false;
 
-  int computer_move = finder_m_p->winningMove(game_p, computer_p);
+  int computer_move = finder_m_p->winningMove(game_p, 
+                                              game_p->getComputer());
 
   if ( 0 <= computer_move )
   {
-    game_p->addMove(computer_move, computer_p);
+    game_p->addComputerMove(computer_move);
     message += "Computer Wins!\n";
   }
   else if ( NULL != next_m_p )
   {
-    return_value = next_m_p->makeMove(human_move, message, 
-                                      human_p, computer_p, game_p);
+    return_value = next_m_p->makeMove(human_move, message, game_p);
   }
 
   return return_value;
@@ -134,17 +123,16 @@ bool Step4::makeMove(int human_move,
 
 bool Step5::makeMove(int human_move,
                      string& message,
-                     Player* human_p, 
-                     Player* computer_p,
                      Game*   game_p)
 {
   bool return_value = false;
 
-  int computer_move = finder_m_p->winningMove(game_p, human_p);
+  int computer_move = finder_m_p->winningMove(game_p, 
+                                              game_p->getHuman());
 
   if ( 0 <= computer_move )
   {
-    game_p->addMove(computer_move, computer_p);
+    game_p->addComputerMove(computer_move);
 
     if ( game_p->moveAvailable() )
       return_value = true;
@@ -155,8 +143,7 @@ bool Step5::makeMove(int human_move,
   }
   else if ( NULL != next_m_p )
   {
-    return_value = next_m_p->makeMove(human_move, message, 
-                                      human_p, computer_p, game_p);
+    return_value = next_m_p->makeMove(human_move, message, game_p);
   }
 
   return return_value;
@@ -188,17 +175,19 @@ LastStep::
 
 bool LastStep::makeMove(int human_move,
                         string& message,
-                        Player* human_p, 
-                        Player* computer_p,
                         Game*   game_p)
 {
+
+  const Player* human_p    = game_p->getHuman();
+  const Player* computer_p = game_p->getComputer();
+
   int computer_move = rule_m_p->getMove(human_p, computer_p, game_p);
 
   bool return_value = false;
 
   if ( 0 <= computer_move )
   {
-    game_p->addMove(computer_move, computer_p);
+    game_p->addComputerMove(computer_move);
 
     if ( game_p->moveAvailable() )
       return_value = true;

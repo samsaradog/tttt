@@ -21,8 +21,6 @@ public:                                      \
                                              \
   virtual bool makeMove(int human_move,      \
                         string& message,     \
-                        Player* human_p,     \
-                        Player* computer_p,  \
                         Game* game_p);       \
 };
 
@@ -41,8 +39,6 @@ public:
                                             
   virtual bool makeMove(int human_move,      
                         string& message,   
-                        Player* human_p,  
-                        Player* computer_p,
                         Game* game_p);    
 private:
   Rule* rule_m_p;

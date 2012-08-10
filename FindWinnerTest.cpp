@@ -77,7 +77,7 @@ const int NOT_BLOCKED_MOVE_COUNT = sizeof(notBlockedMoveCombinations)/
 
 void FindWinnerTest::setUp()
 {
-  game_m.reset(&human_m, &computer_m);
+  game_m.reset();
 }
 
 //---------------------------------------------------------------
@@ -90,17 +90,17 @@ void FindWinnerTest::tearDown()
 
 void FindWinnerTest::humanWinner()
 {
-  game_m.addMove(0, &human_m);
-  game_m.addMove(1, &human_m);
-  game_m.addMove(6, &computer_m);
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(3, &computer_m);
+  game_m.addHumanMove(0);
+  game_m.addHumanMove(1);
+  game_m.addComputerMove(6);
+  game_m.addComputerMove(8);
+  game_m.addComputerMove(3);
 
-  CPPUNIT_ASSERT(!finder_m_p->hasWinner(&human_m));
+  CPPUNIT_ASSERT(!finder_m_p->hasWinner(game_m.getHuman()));
 
-  game_m.addMove(2, &human_m);
+  game_m.addHumanMove(2);
 
-  CPPUNIT_ASSERT(finder_m_p->hasWinner(&human_m));
+  CPPUNIT_ASSERT(finder_m_p->hasWinner(game_m.getHuman()));
 }
 
 //---------------------------------------------------------------
@@ -109,12 +109,12 @@ void FindWinnerTest::allHumanWinners()
 {
   for (int i = 0; i < WINNING_MOVE_COUNT; i++)
   {
-    game_m.reset(&human_m, &computer_m);
+    game_m.reset();
 
     for ( int j = 0; j < WINNING_MOVE_SIZE; j++ )
-      game_m.addMove(winningMoveCombinations[i][j], &human_m);
+      game_m.addHumanMove(winningMoveCombinations[i][j]);
 
-    CPPUNIT_ASSERT(finder_m_p->hasWinner(&human_m));
+    CPPUNIT_ASSERT(finder_m_p->hasWinner(game_m.getHuman()));
   }
 }
 
@@ -122,18 +122,17 @@ void FindWinnerTest::allHumanWinners()
 
 void FindWinnerTest::computerWinner()
 {
-  game_m.addMove(0, &computer_m);
-  game_m.addMove(1, &computer_m);
-  game_m.addMove(3, &human_m);
-  game_m.addMove(8, &human_m);
-  game_m.addMove(4, &human_m);
+  game_m.addComputerMove(0);
+  game_m.addComputerMove(1);
+  game_m.addHumanMove(3);
+  game_m.addHumanMove(8);
+  game_m.addHumanMove(4);
 
-  CPPUNIT_ASSERT(!finder_m_p->hasWinner(&computer_m));
+  CPPUNIT_ASSERT(!finder_m_p->hasWinner(game_m.getComputer()));
 
-  game_m.addMove(2, &computer_m);
+  game_m.addComputerMove(2);
 
-  CPPUNIT_ASSERT(finder_m_p->hasWinner(&computer_m));
-
+  CPPUNIT_ASSERT(finder_m_p->hasWinner(game_m.getComputer()));
 }
 
 //---------------------------------------------------------------
@@ -142,12 +141,12 @@ void FindWinnerTest::allComputerWinners()
 {
   for (int i = 0; i < WINNING_MOVE_COUNT; i++)
   {
-    game_m.reset(&human_m, &computer_m);
+    game_m.reset();
 
     for ( int j = 0; j < WINNING_MOVE_SIZE; j++ )
-      game_m.addMove(winningMoveCombinations[i][j], &computer_m);
+      game_m.addComputerMove(winningMoveCombinations[i][j]);
 
-    CPPUNIT_ASSERT(finder_m_p->hasWinner(&computer_m));
+    CPPUNIT_ASSERT(finder_m_p->hasWinner(game_m.getComputer()));
   }
 }
 
@@ -155,31 +154,31 @@ void FindWinnerTest::allComputerWinners()
 
 void FindWinnerTest::makeWinner(void)
 {
-  game_m.addMove(0, &human_m);
-  game_m.addMove(3, &human_m);
+  game_m.addHumanMove(0);
+  game_m.addHumanMove(3);
 
-  int winningMove = finder_m_p->winningMove(&game_m, &human_m);
+  int winningMove = finder_m_p->winningMove(&game_m, game_m.getHuman());
 
   CPPUNIT_ASSERT( 0 > winningMove );
 
-  game_m.addMove(1, &human_m);
-  game_m.addMove(2, &computer_m);
+  game_m.addHumanMove(1);
+  game_m.addComputerMove(2);
 
   // 3 would be a winning move for the human, but
   // since the computer is there, it should not be
   // available
 
-  winningMove = finder_m_p->winningMove(&game_m, &human_m);
+  winningMove = finder_m_p->winningMove(&game_m, game_m.getHuman());
 
   CPPUNIT_ASSERT( 0 > winningMove );
 
-  game_m.addMove(8, &human_m);
-  winningMove = finder_m_p->winningMove(&game_m, &human_m);
+  game_m.addHumanMove(8);
+  winningMove = finder_m_p->winningMove(&game_m, game_m.getHuman());
 
   CPPUNIT_ASSERT( 0 <= winningMove );
 
-  game_m.addMove(winningMove, &human_m);
-  CPPUNIT_ASSERT(finder_m_p->hasWinner(&human_m));
+  game_m.addHumanMove(winningMove);
+  CPPUNIT_ASSERT(finder_m_p->hasWinner(game_m.getHuman()));
 }
 
 //---------------------------------------------------------------
@@ -190,17 +189,17 @@ void FindWinnerTest::checkBlockedMoves()
 
   for ( int i = 0; i < BLOCKED_MOVE_COUNT; i++ )
   {
-    game_m.addMove(blockedMoveCombinations[i][0], &human_m);
-    game_m.addMove(blockedMoveCombinations[i][1], &human_m);
+    game_m.addHumanMove(blockedMoveCombinations[i][0]);
+    game_m.addHumanMove(blockedMoveCombinations[i][1]);
 
-    winningMove = finder_m_p->winningMove(&game_m, &human_m);
+    winningMove = finder_m_p->winningMove(&game_m, game_m.getHuman());
 
     CPPUNIT_ASSERT( 0 <= winningMove );
 
-    game_m.addMove(winningMove, &human_m);
-    CPPUNIT_ASSERT(finder_m_p->hasWinner(&human_m));
+    game_m.addHumanMove(winningMove);
+    CPPUNIT_ASSERT(finder_m_p->hasWinner(game_m.getHuman()));
 
-    game_m.reset(&human_m, &computer_m);
+    game_m.reset();
   }
 }
 
@@ -212,14 +211,14 @@ void FindWinnerTest::checkNotBlockedMoves()
 
   for ( int i = 0; i < NOT_BLOCKED_MOVE_COUNT; i++ )
   {
-    game_m.addMove(notBlockedMoveCombinations[i][0], &human_m);
-    game_m.addMove(notBlockedMoveCombinations[i][1], &human_m);
+    game_m.addHumanMove(notBlockedMoveCombinations[i][0]);
+    game_m.addHumanMove(notBlockedMoveCombinations[i][1]);
 
-    winningMove = finder_m_p->winningMove(&game_m, &human_m);
+    winningMove = finder_m_p->winningMove(&game_m, game_m.getHuman());
 
     CPPUNIT_ASSERT( 0 > winningMove );
 
-    game_m.reset(&human_m, &computer_m);
+    game_m.reset();
   }
 }
 

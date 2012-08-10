@@ -27,7 +27,7 @@ void ViewTest::setUp()
   result_m += "-----------\n";
   result_m += " 7 | 8 | 9 \n";
 
-  game_m.reset(&human_m, &computer_m);
+  game_m.reset();
 }
 
 //---------------------------------------------------------------
@@ -40,7 +40,9 @@ void ViewTest::tearDown()
 
 void ViewTest::showEmpty()
 {
-  string result = view_m.show(&human_m, &computer_m, &game_m);
+  string result = view_m.show(game_m.getHuman(), 
+                              game_m.getComputer(), 
+                              &game_m);
 
   CPPUNIT_ASSERT( result_m == result );
 }
@@ -49,13 +51,15 @@ void ViewTest::showEmpty()
 
 void ViewTest::showOneMove()
 {
-  game_m.addMove(mapper_m.humanToComputer(6), &human_m);
-  game_m.addMove(mapper_m.humanToComputer(8), &computer_m);
+  game_m.addHumanMove(mapper_m.humanToComputer(6));
+  game_m.addComputerMove(mapper_m.humanToComputer(8));
 
   result_m.replace(VT_SIX_POS, 1, 1, 'X');
   result_m.replace(VT_EIGHT_POS, 1, 1, 'O');
 
-  string result = view_m.show(&human_m, &computer_m, &game_m);
+  string result = view_m.show(game_m.getHuman(), 
+                              game_m.getComputer(), 
+                              &game_m);
 
   CPPUNIT_ASSERT( result_m == result );
 }

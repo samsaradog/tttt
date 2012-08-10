@@ -20,11 +20,11 @@ class PlayerTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST_SUITE_END();
 
 public:
-  PlayerTest() : human_m(), computer_m(), game_m(&human_m, &computer_m)  {};
-  ~PlayerTest()
-  {
-    tearDown();
-  }
+  PlayerTest() : game_m(),
+                 human_m_p(game_m.getHuman()), 
+                 computer_m_p(game_m.getComputer())  {};
+
+  ~PlayerTest() {};
 
   void setUp();
   void tearDown();
@@ -34,9 +34,10 @@ protected:
   void checkMove();
 
 private:
-  Player human_m;
-  Player computer_m;
   Game   game_m;
+
+  const Player* human_m_p;
+  const Player* computer_m_p;
 };
 
 

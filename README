@@ -23,3 +23,13 @@ I may change the numbering scheme initially, but for now it works.
 
 The first thing that will change is making several classes into
 singletons, using John Vlissides classic guidance.
+
+Next problem is how to make copies of the Game objects, or at least the
+state of the Game objects, as the nodes of the tree get created. In
+the last implementation, Game just held the two players (Human and
+Computer) to make sure that the state of all three got updated at
+the same time when one of the players made a move. There was only one
+Game, but it was given pointers to the players that were part of it.
+Maybe the way to do it is to have the Game incorporate two player
+objects, then make pointers to them available. That way, a copy of
+the Game can just make copies of the players. No mementos necessary.

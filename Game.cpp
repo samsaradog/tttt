@@ -7,9 +7,9 @@
 
 //---------------------------------------------------------------
 
-Game::Game(Player* human_p, Player* computer_p)
+Game::Game()
 {
-  reset(human_p, computer_p);
+  reset();
 }
 
 //---------------------------------------------------------------
@@ -20,10 +20,10 @@ Game::~Game()
 
 //---------------------------------------------------------------
 
-void Game::reset(Player* human_p, Player* computer_p) throw()
+void Game::reset() throw()
 {
-  human_p->clear();
-  computer_p->clear();
+  human_m.clear();
+  computer_m.clear();
 
   availableMoves_m.clear();
 
@@ -33,11 +33,20 @@ void Game::reset(Player* human_p, Player* computer_p) throw()
 
 //---------------------------------------------------------------
 
-void Game::addMove(int move, Player* player_p) throw (invalid_argument)
+void Game::addHumanMove(int move) throw (invalid_argument)
 {
   checkAvailableMoves(move);
 
-  player_p->insert(move);
+  human_m.insert(move);
+}
+
+//---------------------------------------------------------------
+
+void Game::addComputerMove(int move) throw (invalid_argument)
+{
+  checkAvailableMoves(move);
+
+  computer_m.insert(move);
 }
 
 //---------------------------------------------------------------

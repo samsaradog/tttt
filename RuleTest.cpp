@@ -13,6 +13,8 @@ void RuleTest::setUp()
   RuleFactory the_factory;
 
   rule_m_p = the_factory.getRules();
+
+  game_m.reset();
 }
 
 //---------------------------------------------------------------
@@ -33,12 +35,14 @@ void RuleTest::tearDown()
 void RuleTest::testRule1()
 {
   for ( int i = 0; i < 3; i++ )
-    game_m.addMove(i, &human_m);
+    game_m.addHumanMove(i);
 
   for ( int i = 4; i < 9; i++ )
-    game_m.addMove(i, &computer_m);
+    game_m.addComputerMove(i);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 3 == move );
 }
@@ -49,7 +53,9 @@ void RuleTest::testRule1()
 
 void RuleTest::testRule2()
 {
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 8 == move );
 }
@@ -61,9 +67,11 @@ void RuleTest::testRule2()
 
 void RuleTest::testRule3()
 {
-  game_m.addMove(8, &human_m);
+  game_m.addHumanMove(8);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
   
   CPPUNIT_ASSERT( 0 == (move % 2) );
 }
@@ -76,10 +84,12 @@ void RuleTest::testRule3()
 
 void RuleTest::testRule4Odd()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(6, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(6);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
   
   CPPUNIT_ASSERT( 1 == move );
 }
@@ -90,10 +100,12 @@ void RuleTest::testRule4Odd()
 
 void RuleTest::testRule4Even()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(5, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(5);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
   
   CPPUNIT_ASSERT( 0 == move );
 }
@@ -105,11 +117,13 @@ void RuleTest::testRule4Even()
 
 void RuleTest::testRule5a()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(0, &human_m);
-  game_m.addMove(4, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(0);
+  game_m.addHumanMove(4);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 1 == (move % 2)  );
 }
@@ -120,11 +134,13 @@ void RuleTest::testRule5a()
 
 void RuleTest::testRule5b()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(2, &human_m);
-  game_m.addMove(6, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(6);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 1 == (move % 2)  );
 }
@@ -136,11 +152,13 @@ void RuleTest::testRule5b()
 
 void RuleTest::testRule6a()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(2, &human_m);
-  game_m.addMove(5, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(5);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 7 == move );
 }
@@ -151,11 +169,13 @@ void RuleTest::testRule6a()
 
 void RuleTest::testRule6b()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(6, &human_m);
-  game_m.addMove(1, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(6);
+  game_m.addHumanMove(1);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 3 == move );
 }
@@ -166,11 +186,13 @@ void RuleTest::testRule6b()
 
 void RuleTest::testRule6c()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(2, &human_m);
-  game_m.addMove(7, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(7);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 5 == move );
 }
@@ -179,11 +201,13 @@ void RuleTest::testRule6c()
 
 void RuleTest::testRule6d()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(6, &human_m);
-  game_m.addMove(3, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(6);
+  game_m.addHumanMove(3);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 1 == move );
 }
@@ -192,11 +216,13 @@ void RuleTest::testRule6d()
 
 void RuleTest::testRule6e()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(0, &human_m);
-  game_m.addMove(5, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(0);
+  game_m.addHumanMove(5);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 3 == move );
 }
@@ -208,11 +234,13 @@ void RuleTest::testRule6e()
 
 void RuleTest::testRule7a()
 {
-  game_m.addMove(8, &human_m);
-  game_m.addMove(0, &human_m);
-  game_m.addMove(4, &computer_m);
+  game_m.addHumanMove(8);
+  game_m.addHumanMove(0);
+  game_m.addComputerMove(4);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 6 == move );
 }
@@ -221,11 +249,13 @@ void RuleTest::testRule7a()
 
 void RuleTest::testRule7b()
 {
-  game_m.addMove(8, &human_m);
-  game_m.addMove(2, &human_m);
-  game_m.addMove(6, &computer_m);
+  game_m.addHumanMove(8);
+  game_m.addHumanMove(2);
+  game_m.addComputerMove(6);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 0 == move );
 }
@@ -234,11 +264,13 @@ void RuleTest::testRule7b()
 
 void RuleTest::testRule7c()
 {
-  game_m.addMove(8, &human_m);
-  game_m.addMove(4, &human_m);
-  game_m.addMove(0, &computer_m);
+  game_m.addHumanMove(8);
+  game_m.addHumanMove(4);
+  game_m.addComputerMove(0);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 2 == move );
 }
@@ -247,11 +279,13 @@ void RuleTest::testRule7c()
 
 void RuleTest::testRule7d()
 {
-  game_m.addMove(8, &human_m);
-  game_m.addMove(6, &human_m);
-  game_m.addMove(2, &computer_m);
+  game_m.addHumanMove(8);
+  game_m.addHumanMove(6);
+  game_m.addComputerMove(2);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 4 == move );
 }
@@ -264,11 +298,13 @@ void RuleTest::testRule7d()
 
 void RuleTest::testRule8a()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(1, &human_m);
-  game_m.addMove(3, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(1);
+  game_m.addHumanMove(3);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 4 == move );
 }
@@ -277,11 +313,13 @@ void RuleTest::testRule8a()
 
 void RuleTest::testRule8b()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(1, &human_m);
-  game_m.addMove(7, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(1);
+  game_m.addHumanMove(7);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 0 == move );
 }
@@ -293,11 +331,13 @@ void RuleTest::testRule8b()
 
 void RuleTest::testRule8c()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(1, &human_m);
-  game_m.addMove(5, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(1);
+  game_m.addHumanMove(5);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 6 == move );
 }
@@ -306,11 +346,13 @@ void RuleTest::testRule8c()
 
 void RuleTest::testRule8d()
 {
-  game_m.addMove(8, &computer_m);
-  game_m.addMove(3, &human_m);
-  game_m.addMove(7, &human_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(3);
+  game_m.addHumanMove(7);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
 
   CPPUNIT_ASSERT( 0 == move );
 }
@@ -326,12 +368,14 @@ void RuleTest::testLastRule()
 
   IntSet some_moves(a_moves, a_moves+5);
 
-  game_m.addMove(0, &computer_m);
-  game_m.addMove(1, &human_m);
-  game_m.addMove(2, &computer_m);
-  game_m.addMove(8, &human_m);
+  game_m.addComputerMove(0);
+  game_m.addHumanMove(1);
+  game_m.addComputerMove(2);
+  game_m.addHumanMove(8);
 
-  int move = rule_m_p->getMove(&human_m, &computer_m, &game_m);
+  int move = rule_m_p->getMove(game_m.getHuman(), 
+                               game_m.getComputer(), 
+                               &game_m);
   
   CPPUNIT_ASSERT( some_moves.count(move) );
 }

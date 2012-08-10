@@ -22,10 +22,10 @@ class GameTest : public CPPUNIT_NS::TestFixture
 
 public:
 
-  GameTest() : human_m_p(NULL), computer_m_p(NULL), game_m_p(NULL) {};
+  GameTest() : game_m()  {};
+
   ~GameTest()
   {
-    tearDown();
   }
 
   void setUp();
@@ -38,10 +38,8 @@ protected:
   void availableMoves();
 
 private:
-  Player* human_m_p;
-  Player* computer_m_p;
+  Game game_m;
 
-  Game* game_m_p;
 };
 
 

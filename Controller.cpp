@@ -8,8 +8,9 @@
 
 //---------------------------------------------------------------
 
-Controller::Controller() : human_m(), computer_m(), 
-                           game_m(&human_m, &computer_m),
+Controller::Controller() : game_m(),
+                           human_m_p(game_m.getHuman()), 
+                           computer_m_p(game_m.getComputer()), 
                            view_m(), continue_game_m(true),
                            step_m_p(NULL)
 {
@@ -44,21 +45,21 @@ bool Controller::addResponse(char input, string& message)
   {
     case 'Y':
     {
-      game_m.reset(&human_m, &computer_m);
+      game_m.reset();
 
       bool computer_first = ( 1 == (rand() % 2) );
 
       if ( computer_first )
       {
         message += "Computer moves first.\n";
-        game_m.addMove(8, &computer_m);
+        game_m.addComputerMove(8);
       }
       else
       {
         message += "Human moves first.\n";
       }
 
-      message += view_m.show(&human_m, &computer_m, &game_m);
+      message += view_m.show(human_m_p, computer_m_p, &game_m);
       message += CT_MOVE_MESSAGE;
     }
     break;
@@ -80,11 +81,9 @@ bool Controller::addResponse(char input, string& message)
 
        bool more_moves = step_m_p->makeMove(translated_move,
                                             message,
-                                            &human_m,
-                                            &computer_m,
                                             &game_m);
 
-       message += view_m.show(&human_m, &computer_m, &game_m);
+       message += view_m.show(human_m_p, computer_m_p, &game_m);
 
        if ( more_moves )
          message += CT_MOVE_MESSAGE;

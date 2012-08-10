@@ -24,8 +24,7 @@ class FindWinnerTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST_SUITE_END();
 
 public:
-  FindWinnerTest() : human_m(), computer_m(), 
-                     game_m(&human_m, &computer_m),
+  FindWinnerTest() : game_m(),
                      finder_m_p(FindWinner::Instance()) {};
 
   ~FindWinnerTest() {};
@@ -43,9 +42,6 @@ protected:
   void checkNotBlockedMoves();
 
 private:
-  Player     human_m;
-  Player     computer_m;
-
   Game       game_m;
 
   FindWinner* finder_m_p;

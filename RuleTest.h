@@ -40,9 +40,7 @@ class RuleTest : public CPPUNIT_NS::TestFixture
 
 public:
 
-  RuleTest() : human_m(), 
-               computer_m(), 
-               game_m(&human_m, &computer_m),
+  RuleTest() : game_m(),
                rule_m_p(NULL)
                {};
 
@@ -78,9 +76,6 @@ protected:
   void testLastRule();
 
 private:
-  Player human_m;
-  Player computer_m;
-
   Game game_m;
 
   Rule* rule_m_p;

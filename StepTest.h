@@ -27,9 +27,7 @@ class StepTest : public CPPUNIT_NS::TestFixture
 
 public:
 
-  StepTest() : human_m(), 
-               computer_m(), 
-               game_m(&human_m, &computer_m),
+  StepTest() : game_m(),
                step_m_p(NULL)
                {};
 
@@ -52,9 +50,6 @@ protected:
   void testLastStepB();
 
 private:
-  Player human_m;
-  Player computer_m;
-
   Game game_m;
 
   Step* step_m_p;

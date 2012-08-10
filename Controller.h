@@ -38,9 +38,10 @@ public:
 private:
 
   Mapper 	mapper_m;
-  Player 	human_m;
-  Player	computer_m;
   Game 		game_m;
+
+  const Player* human_m_p;
+  const Player*	computer_m_p;
 
   View		view_m;
 

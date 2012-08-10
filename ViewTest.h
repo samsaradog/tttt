@@ -21,9 +21,7 @@ class ViewTest : public CPPUNIT_NS::TestFixture
 
 public:
 
-  ViewTest() : human_m(), 
-               computer_m(), 
-               game_m(&human_m, &computer_m),
+  ViewTest() : game_m(),
                view_m(),
                result_m(""),
                mapper_m() {};
@@ -41,9 +39,6 @@ protected:
   void showOneMove();
 
 private:
-  Player human_m;
-  Player computer_m;
-
   Game game_m;
 
   View view_m;

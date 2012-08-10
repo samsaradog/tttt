@@ -32,12 +32,11 @@ void StepTest::tearDown()
 
 void StepTest::testStep1()
 {
-  game_m.addMove(1, &human_m);
+  game_m.addHumanMove(1);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(1, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(1, message, &game_m);
 
   CPPUNIT_ASSERT( message == 
                  "Square 2 not available. Please choose another.\n" );
@@ -52,13 +51,12 @@ void StepTest::testStep1()
 
 void StepTest::testStep2()
 {
-  game_m.addMove(2, &human_m);
-  game_m.addMove(3, &human_m);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(3);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(4, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(4, message, &game_m);
 
   CPPUNIT_ASSERT( message == "The Human has won. Congratulations!\n");
 
@@ -73,12 +71,11 @@ void StepTest::testStep2()
 void StepTest::testStep3()
 {
   for ( int i = 1; i < 9; i++ )
-    game_m.addMove(i, &computer_m);
+    game_m.addComputerMove(i);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(0, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(0, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n");
 
@@ -92,13 +89,12 @@ void StepTest::testStep3()
 
 void StepTest::testStep4()
 {
-  game_m.addMove(3, &computer_m);
-  game_m.addMove(8, &computer_m);
+  game_m.addComputerMove(3);
+  game_m.addComputerMove(8);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(1, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(1, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Computer Wins!\n" );
 
@@ -113,19 +109,18 @@ void StepTest::testStep4()
 
 void StepTest::testStep5a()
 {
-  game_m.addMove(0, &computer_m);
-  game_m.addMove(1, &computer_m);
-  game_m.addMove(3, &computer_m);
-  game_m.addMove(8, &computer_m);
+  game_m.addComputerMove(0);
+  game_m.addComputerMove(1);
+  game_m.addComputerMove(3);
+  game_m.addComputerMove(8);
 
-  game_m.addMove(2, &human_m);
-  game_m.addMove(4, &human_m);
-  game_m.addMove(7, &human_m);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(4);
+  game_m.addHumanMove(7);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(5, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(5, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n" );
 
@@ -138,16 +133,15 @@ void StepTest::testStep5a()
 
 void StepTest::testStep5b()
 {
-  game_m.addMove(3, &computer_m);
-  game_m.addMove(8, &computer_m);
+  game_m.addComputerMove(3);
+  game_m.addComputerMove(8);
 
-  game_m.addMove(2, &human_m);
-  game_m.addMove(7, &human_m);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(7);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(6, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(6, message, &game_m);
 
   CPPUNIT_ASSERT( message == "" );
 
@@ -161,19 +155,18 @@ void StepTest::testStep5b()
 
 void StepTest::testLastStepA()
 {
-  game_m.addMove(1, &computer_m);
-  game_m.addMove(4, &computer_m);
-  game_m.addMove(6, &computer_m);
-  game_m.addMove(8, &computer_m);
+  game_m.addComputerMove(1);
+  game_m.addComputerMove(4);
+  game_m.addComputerMove(6);
+  game_m.addComputerMove(8);
 
-  game_m.addMove(2, &human_m);
-  game_m.addMove(3, &human_m);
-  game_m.addMove(5, &human_m);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(3);
+  game_m.addHumanMove(5);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(0, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(0, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n" );
 
@@ -186,14 +179,13 @@ void StepTest::testLastStepA()
 
 void StepTest::testLastStepB()
 {
-  game_m.addMove(1, &computer_m);
+  game_m.addComputerMove(1);
 
-  game_m.addMove(3, &human_m);
+  game_m.addHumanMove(3);
 
   string message("");
 
-  bool keep_playing = 
-         step_m_p->makeMove(6, message, &human_m, &computer_m, &game_m);
+  bool keep_playing = step_m_p->makeMove(6, message, &game_m);
 
   CPPUNIT_ASSERT( message == "" );
 
