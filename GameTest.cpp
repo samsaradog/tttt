@@ -9,6 +9,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( GameTest );
 
 void GameTest::setUp()
 {
+  game_m.reset();
 }
 
 //---------------------------------------------------------------
@@ -74,6 +75,32 @@ void GameTest::availableMoves(void)
     move += 2;
     it++;
   }
+}
+
+//---------------------------------------------------------------
+
+void GameTest::equalityTestA(void)
+{
+  game_m.addHumanMove(1);
+
+  Game another_game(game_m);  
+
+  CPPUNIT_ASSERT( game_m == another_game );
+
+  CPPUNIT_ASSERT( !game_m.moveAvailable(1) );
+}
+
+//---------------------------------------------------------------
+
+void GameTest::equalityTestB(void)
+{
+  game_m.addComputerMove(3);
+
+  Game another_game = game_m;
+
+  CPPUNIT_ASSERT( game_m == another_game );
+
+  CPPUNIT_ASSERT( !game_m.moveAvailable(3) );
 }
 
 //---------------------------------------------------------------

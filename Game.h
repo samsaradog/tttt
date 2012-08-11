@@ -20,7 +20,13 @@ class Game
 
 public:
   Game();
+  Game(const Game& other);
+
   ~Game();
+
+  Game& operator=(Game other);
+
+  bool operator==(const Game& other);
 
   void reset() throw();
 
@@ -41,7 +47,7 @@ public:
 
 private:
 
-  IntSet availableMoves_m;
+  IntSet available_moves_m;
 
   Player human_m;
   Player computer_m;

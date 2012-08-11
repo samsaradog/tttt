@@ -18,6 +18,8 @@ class GameTest : public CPPUNIT_NS::TestFixture
 //  CPPUNIT_TEST( checkMoves );
   CPPUNIT_TEST( isMoveAvailable );
   CPPUNIT_TEST( availableMoves );
+  CPPUNIT_TEST( equalityTestA );
+  CPPUNIT_TEST( equalityTestB );
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -36,6 +38,8 @@ protected:
 //  void checkMoves();
   void isMoveAvailable();
   void availableMoves();
+  void equalityTestA();
+  void equalityTestB();
 
 private:
   Game game_m;
