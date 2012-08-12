@@ -45,12 +45,20 @@ public:
   // Returns a copy of the set of available moves
   const IntSet& getAvailable() const;
 
+  // Returns whether a player has won or the game is a draw
+  bool isLeaf() const;
+
+  // Returns value of the game
+  int getValue();
+
 private:
 
   IntSet available_moves_m;
 
   Player human_m;
   Player computer_m;
+
+  int game_value_m;
 
   // Throws an exception if the move is not available
   void checkAvailableMoves(int move) throw (invalid_argument);

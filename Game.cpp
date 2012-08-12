@@ -2,12 +2,13 @@
 
 #include <cppunit/config/SourcePrefix.h>
 #include "Game.h"
+#include "FindWinner.h"
 
 #include <algorithm>
 
 //---------------------------------------------------------------
 
-Game::Game()
+Game::Game() : game_value_m(0)
 {
   reset();
 }
@@ -117,6 +118,46 @@ bool Game::moveAvailable(int move) const
 const IntSet& Game::getAvailable() const
 {
   return available_moves_m;
+}
+
+//---------------------------------------------------------------
+
+bool Game::isLeaf() const
+{
+  bool return_value = false;
+
+  FindWinner* finder_p = FindWinner::Instance();
+
+  if ( ( finder_p->hasWinner(&human_m) )    ||
+       ( finder_p->hasWinner(&computer_m) ) ||
+       ( ! moveAvailable() )                   )
+  {
+    return_value = true;
+  }
+
+  return return_value;
+}
+
+//---------------------------------------------------------------
+
+int Game::getValue()
+{
+  FindWinner* finder_p = FindWinner::Instance();
+
+  if ( finder_p->hasWinner(&human_m) )
+  {
+    game_value_m = -1;
+  }
+  else if ( finder_p->hasWinner(&computer_m) ) 
+  {
+    game_value_m = 1;
+  }
+  else if ( ! moveAvailable() ) 
+  {
+    game_value_m = 0;
+  }
+  
+  return game_value_m; 
 }
 
 //---------------------------------------------------------------

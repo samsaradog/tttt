@@ -20,6 +20,11 @@ class GameTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST( availableMoves );
   CPPUNIT_TEST( equalityTestA );
   CPPUNIT_TEST( equalityTestB );
+  CPPUNIT_TEST( isLeafTest );
+  CPPUNIT_TEST( isNotLeafTest );
+  CPPUNIT_TEST( nodeValueWin );
+  CPPUNIT_TEST( nodeValueLose );
+  CPPUNIT_TEST( nodeValueDraw );
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -40,9 +45,16 @@ protected:
   void availableMoves();
   void equalityTestA();
   void equalityTestB();
+  void isLeafTest();
+  void isNotLeafTest();
+  void nodeValueWin();
+  void nodeValueLose();
+  void nodeValueDraw();
 
 private:
   Game game_m;
+
+  void buildDrawGame();
 
 };
 

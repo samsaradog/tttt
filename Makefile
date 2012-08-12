@@ -12,8 +12,8 @@ LFLAGS?=
 TESTAPP = tttttest
 APP = tttt
 MAINOBJ = tttt.o
-OBJS =  Mapper.o Game.o FindWinner.o Player.o View.o RuleFactory.o Rules.o Controller.o StepFactory.o Steps.o
-TESTOBJS = Main.o MapTest.o GameTest.o FindWinnerTest.o ViewTest.o PlayerTest.o RuleTest.o ControllerTest.o StepTest.o
+OBJS =  Mapper.o Game.o FindWinner.o Player.o View.o RuleFactory.o Rules.o Controller.o StepFactory.o Steps.o TreeNode.o
+TESTOBJS = Main.o MapTest.o GameTest.o FindWinnerTest.o ViewTest.o PlayerTest.o RuleTest.o ControllerTest.o StepTest.o TreeNodeTest.o
 
 LIBS = -lstdc++ -ldl 
 
@@ -42,6 +42,7 @@ Rules.o: Rules.cpp Rules.h Rule.h
 Controller.o: Controller.cpp Controller.h Game.o Mapper.h
 StepFactory.o: StepFactory.cpp StepFactory.h Steps.h
 Steps.o: Steps.cpp Steps.h Step.h
+TreeNode.o: TreeNode.cpp TreeNode.h
 
 MapTest.o: MapTest.cpp MapTest.h Mapper.o
 GameTest.o: GameTest.cpp GameTest.h Game.o
@@ -51,6 +52,7 @@ ViewTest.o: ViewTest.cpp ViewTest.h View.o Game.o
 RuleTest.o: RuleTest.cpp RuleTest.h Rules.o Game.o
 ControllerTest.o: ControllerTest.cpp ControllerTest.h Controller.o Game.o
 StepTest.o: StepTest.cpp StepTest.h Steps.o Game.o
+TreeNodeTest.o: TreeNodeTest.cpp TreeNodeTest.h TreeNode.o Game.o
 
 main.o: main.cpp
 

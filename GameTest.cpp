@@ -104,3 +104,99 @@ void GameTest::equalityTestB(void)
 }
 
 //---------------------------------------------------------------
+
+void GameTest::isLeafTest(void)
+{
+  // build a draw game
+  buildDrawGame();
+  
+  CPPUNIT_ASSERT( game_m.isLeaf() );
+
+  game_m.reset();
+
+  // Now a computer win
+
+  for ( int i = 0; i < 3; i++ )
+    game_m.addComputerMove(i);
+
+  CPPUNIT_ASSERT( game_m.isLeaf() );
+
+  game_m.reset();
+
+  // Now a human win
+
+  for ( int i = 0; i < 3; i++ )
+    game_m.addHumanMove(i);
+
+  CPPUNIT_ASSERT( game_m.isLeaf() );
+}
+
+//---------------------------------------------------------------
+
+void GameTest::isNotLeafTest()
+{
+  // start with an empty game
+
+  CPPUNIT_ASSERT( !game_m.isLeaf() );
+
+  // add a few, but not enough to make a winner or draw
+  
+  game_m.addHumanMove(0);
+  game_m.addHumanMove(2);
+
+  game_m.addComputerMove(1);
+  game_m.addComputerMove(8);
+
+  CPPUNIT_ASSERT( !game_m.isLeaf() );
+}
+
+//---------------------------------------------------------------
+
+void GameTest::nodeValueWin()
+{
+  for ( int i = 0; i < 3; i++ )
+    game_m.addComputerMove(i);
+
+  CPPUNIT_ASSERT( 1 == game_m.getValue() );
+}
+
+//---------------------------------------------------------------
+
+void GameTest::nodeValueLose()
+{
+  for ( int i = 0; i < 3; i++ )
+    game_m.addHumanMove(i);
+
+  CPPUNIT_ASSERT( -1 == game_m.getValue() );
+}
+
+//---------------------------------------------------------------
+
+void GameTest::nodeValueDraw()
+{
+  // Empty game or game with no winner should also show up as a draw value
+
+  CPPUNIT_ASSERT( 0 == game_m.getValue() );
+
+  buildDrawGame();
+
+  CPPUNIT_ASSERT( 0 == game_m.getValue() );
+}
+
+//---------------------------------------------------------------
+
+void GameTest::buildDrawGame()
+{
+  game_m.addComputerMove(2);
+  game_m.addComputerMove(4);
+  game_m.addComputerMove(7);
+  game_m.addComputerMove(8);
+
+  game_m.addHumanMove(0);
+  game_m.addHumanMove(1);
+  game_m.addHumanMove(3);
+  game_m.addHumanMove(5);
+  game_m.addHumanMove(6);
+}
+
+//---------------------------------------------------------------
