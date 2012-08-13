@@ -13,6 +13,8 @@ void StepTest::setUp()
   StepFactory the_factory;
 
   step_m_p = the_factory.getSteps();
+
+  game_m.reset();
 }
 
 //---------------------------------------------------------------
@@ -92,13 +94,16 @@ void StepTest::testStep4()
   game_m.addComputerMove(3);
   game_m.addComputerMove(8);
 
+  game_m.addHumanMove(4);
+
   string message("");
 
-  bool keep_playing = step_m_p->makeMove(1, message, &game_m);
+  step_m_p->makeMove(1, message, &game_m);
 
-  CPPUNIT_ASSERT( message == "Computer Wins!\n" );
+  bool message_ok = ( ( message == "Computer Wins!\n" ) ||
+                      ( message == "Computer is going to win.\n" ) );
 
-  CPPUNIT_ASSERT( !keep_playing );
+  CPPUNIT_ASSERT( message_ok );
 }
 
 //---------------------------------------------------------------

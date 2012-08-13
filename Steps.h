@@ -8,7 +8,6 @@
  */
 
 #include "Step.h"
-#include "Rule.h"
 
 using namespace std;
 
@@ -29,20 +28,5 @@ DECLARE_STEP(Step1)
 DECLARE_STEP(Step2)
 DECLARE_STEP(Step3)
 DECLARE_STEP(Step4)
-DECLARE_STEP(Step5)
-
-class LastStep : public Step
-{                                            \
-public:     
-  LastStep();
-  virtual ~LastStep();
-                                            
-  virtual bool makeMove(int human_move,      
-                        string& message,   
-                        Game* game_p);    
-private:
-  Rule* rule_m_p;
-};
-
 
 #endif // STEPS_H

@@ -3,8 +3,6 @@
 #include <cppunit/config/SourcePrefix.h>
 #include "TreeNodeTest.h"
 
-#include <iostream>
-
 CPPUNIT_TEST_SUITE_REGISTRATION( TreeNodeTest );
 
 //---------------------------------------------------------------
@@ -36,7 +34,7 @@ void TreeNodeTest::tearDown()
 
 void TreeNodeTest::minWinLeaf()
 {
-  for ( int i = 0; i < 9; i++ )
+  for ( int i = 0; i < 3; i++ )
     game_m.addHumanMove(i);
     
   current_m_p = new MinNode(game_m);
@@ -49,9 +47,21 @@ void TreeNodeTest::minWinLeaf()
 
 void TreeNodeTest::maxWinLeaf()
 {
-  for ( int i = 0; i < 9; i++ )
+  for ( int i = 0; i < 3; i++ )
     game_m.addComputerMove(i);
     
+  current_m_p = new MaxNode(game_m);
+
+  CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
+  CPPUNIT_ASSERT(  1 == current_m_p->getValue() );
+
+  game_m.reset();
+
+  game_m.addComputerMove(3);
+  game_m.addComputerMove(7);
+  game_m.addComputerMove(8);
+
+  delete current_m_p;
   current_m_p = new MaxNode(game_m);
 
   CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
@@ -306,6 +316,32 @@ void TreeNodeTest::maxDrawDepth5()
 
 //---------------------------------------------------------------
 
+void TreeNodeTest::maxWinDepth5()
+{
+
+//    | X |  
+// ----------
+//    | O | O
+// ----------
+//    |   | X
+
+  // Since the algorithm is only about winning, not winning
+  // quickly, the computer could pick several squares and
+  // still win. Since the square it picks is random, we
+  // can't look for it specifically
+
+  game_m.addHumanMove(1);
+  game_m.addHumanMove(4);
+  game_m.addComputerMove(8);
+  game_m.addComputerMove(6);
+
+  current_m_p = new MaxNode(game_m);
+
+  CPPUNIT_ASSERT( 1 == current_m_p->getValue() );
+}
+
+//---------------------------------------------------------------
+
 void TreeNodeTest::maxWinDepth7()
 {
 
@@ -325,6 +361,27 @@ void TreeNodeTest::maxWinDepth7()
 
 //---------------------------------------------------------------
 
+void TreeNodeTest::maxDrawDepth6()
+{
+
+//  O | X |  
+// ----------
+//    | X |  
+// ----------
+//    |   |  
+
+  game_m.addHumanMove(8);
+  game_m.addHumanMove(1);
+  game_m.addComputerMove(0);
+
+  current_m_p = new MaxNode(game_m);
+
+  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 5 == current_m_p->getMove() );
+}
+
+//---------------------------------------------------------------
+
 void TreeNodeTest::maxDrawDepth7()
 {
 
@@ -338,9 +395,6 @@ void TreeNodeTest::maxDrawDepth7()
   game_m.addComputerMove(1);
 
   current_m_p = new MaxNode(game_m);
-
-cout << endl << "next move is " << current_m_p->getMove() << endl;
-cout << endl << "value is     " << current_m_p->getValue() << endl;
 
   CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
 }
@@ -360,9 +414,6 @@ void TreeNodeTest::maxDrawDepth8()
 
   current_m_p = new MaxNode(game_m);
 
-cout << endl << "next move is " << current_m_p->getMove() << endl;
-cout << endl << "value is     " << current_m_p->getValue() << endl;
-
   CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
 }
 
@@ -378,9 +429,6 @@ void TreeNodeTest::maxDrawDepth9()
 //    |   |  
 
   current_m_p = new MaxNode(game_m);
-
-cout << endl << "next move is " << current_m_p->getMove() << endl;
-cout << endl << "value is     " << current_m_p->getValue() << endl;
 
   CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
 }

@@ -1,7 +1,5 @@
 // file ViewTest.cpp
 
-#include <iostream>
-
 #include <cppunit/config/SourcePrefix.h>
 #include "ViewTest.h"
 

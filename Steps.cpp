@@ -1,9 +1,7 @@
 // file Steps.cpp
 
-#include <iostream>
-
 #include "Steps.h"
-#include "RuleFactory.h"
+#include "TreeNode.h"
 
 //---------------------------------------------------------------
 
@@ -92,7 +90,7 @@ bool Step3::makeMove(int human_move,
 
 //---------------------------------------------------------------
 
-// This step checks whether the computer can make a move and win.
+// This step gets the computer move and adds it to the game.
 
 bool Step4::makeMove(int human_move,
                      string& message,
@@ -100,100 +98,35 @@ bool Step4::makeMove(int human_move,
 {
   bool return_value = false;
 
-  int computer_move = finder_m_p->winningMove(game_p, 
-                                              game_p->getComputer());
+  TreeNode* node_p = new MaxNode(*game_p);
 
-  if ( 0 <= computer_move )
-  {
-    game_p->addComputerMove(computer_move);
-    message += "Computer Wins!\n";
-  }
-  else if ( NULL != next_m_p )
-  {
-    return_value = next_m_p->makeMove(human_move, message, game_p);
-  }
+  int computer_move = node_p->getMove();
+  int game_value    = node_p->getValue();
 
-  return return_value;
-}
-
-//---------------------------------------------------------------
-
-// This step blocks the human from winning. It also checks whether
-// the game has any moves left. If not. declares a draw.
-
-bool Step5::makeMove(int human_move,
-                     string& message,
-                     Game*   game_p)
-{
-  bool return_value = false;
-
-  int computer_move = finder_m_p->winningMove(game_p, 
-                                              game_p->getHuman());
+  delete node_p;
 
   if ( 0 <= computer_move )
   {
     game_p->addComputerMove(computer_move);
 
-    if ( game_p->moveAvailable() )
-      return_value = true;
-    
-    else
+    if ( finder_m_p->hasWinner(game_p->getComputer()) )
+    {
+      message += "Computer Wins!\n";
+    }
+    else if ( !game_p->moveAvailable() )
+    {
       message += "Draw Game.\n";
-    
-  }
-  else if ( NULL != next_m_p )
-  {
-    return_value = next_m_p->makeMove(human_move, message, game_p);
-  }
-
-  return return_value;
-}
-
-//---------------------------------------------------------------
-
-LastStep::
-LastStep() : Step(NULL), rule_m_p(NULL)
-{
-  RuleFactory factory;
-
-  rule_m_p = factory.getRules();
-}
-
-//---------------------------------------------------------------
-
-LastStep::
-~LastStep()
-{
-  if ( NULL != rule_m_p )
-  {
-    delete rule_m_p;
-    rule_m_p = NULL;
-  }
-}
-
-//---------------------------------------------------------------
-
-bool LastStep::makeMove(int human_move,
-                        string& message,
-                        Game*   game_p)
-{
-
-  const Player* human_p    = game_p->getHuman();
-  const Player* computer_p = game_p->getComputer();
-
-  int computer_move = rule_m_p->getMove(human_p, computer_p, game_p);
-
-  bool return_value = false;
-
-  if ( 0 <= computer_move )
-  {
-    game_p->addComputerMove(computer_move);
-
-    if ( game_p->moveAvailable() )
-      return_value = true;
-    
+    }
     else
-      message += "Draw Game.\n";
+    {
+      return_value = true;
+    }
+
+  } // end after checking for valid computer move
+
+  if ( ( true == return_value ) && ( 1 == game_value ) )
+  {
+    message += "Computer is going to win.\n";
   }
 
   return return_value;

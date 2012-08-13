@@ -5,6 +5,7 @@
 
 #include "Controller.h"
 #include "StepFactory.h"
+#include "TreeNode.h"
 
 //---------------------------------------------------------------
 
@@ -47,12 +48,19 @@ bool Controller::addResponse(char input, string& message)
     {
       game_m.reset();
 
+      message.clear();
+
       bool computer_first = ( 1 == (rand() % 2) );
 
       if ( computer_first )
       {
         message += "Computer moves first.\n";
-        game_m.addComputerMove(8);
+
+        TreeNode* node_p = new MaxNode(game_m);
+
+        game_m.addComputerMove( node_p->getMove() );
+
+        delete node_p;
       }
       else
       {

@@ -1,9 +1,15 @@
 // file TreeNode.cpp
 
 #include <algorithm>
-#include <iostream>
 
 #include "TreeNode.h"
+
+/*
+ * Implementation of a min/max decision tree node with alpha/beta
+ * pruning found at:
+ * http://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm
+ *
+ */
 
 //---------------------------------------------------------------
 
@@ -26,7 +32,7 @@ IntVector TreeNode::getMoves()
 
 //---------------------------------------------------------------
 
-MinNode::MinNode(const Game& current_game, int min, int max) : 
+MinNode::MinNode(const Game& current_game, int min, int max) :
 	TreeNode(current_game)
 {
   if ( game_m.isLeaf() )
@@ -68,7 +74,7 @@ void MinNode::minimax(int min, int max)
       next_move_m = *it;
     }
 
-    if ( value_m < min )
+    if ( value_m <= min )
     {
       value_m      = min;
       keep_looking = false;
@@ -82,7 +88,7 @@ void MinNode::minimax(int min, int max)
 
 //---------------------------------------------------------------
 
-MaxNode::MaxNode(const Game& current_game, int min, int max) : 
+MaxNode::MaxNode(const Game& current_game, int min, int max) :
 	TreeNode(current_game)
 {
   if ( game_m.isLeaf() )
@@ -124,7 +130,7 @@ void MaxNode::minimax(int min, int max)
       next_move_m = *it;
     }
 
-    if ( value_m > max )
+    if ( value_m >= max )
     {
       value_m      = max;
       keep_looking = false;
