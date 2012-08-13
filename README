@@ -14,17 +14,13 @@ to determine the computer move. Unlike the earlier rule-based
 implementation, this one should be expandable into larger game
 grids.
 
-Many of the components of the rule-based game should be reusable,
+Many of the components of the rule-based game were reusable,
 such as the Game class to hold the current state of the game,
 and the FindWinner object to determine whether the game is in a
 winning configuration and whether a winning move is possible.
 
 I may change the numbering scheme initially, but for now it works.
 
-The first thing that will change is making several classes into
-singletons, using John Vlissides classic guidance.
-
-Decision tree is implemented and tested. Next step is to tear out
-the rule logic and replace it with tree logic. Will also get rid of
-the numbering scheme used by the rule logic, which unfortunately will
-involve changing a lot of tests.
+For now, the decision tree has been incorporated into the game. This
+is a patient algorithm. It just looks for a move that will win (or draw)
+eventually. Not one that will win quickly.
