@@ -62,11 +62,9 @@ void MinNode::minimax(int min, int max)
 
     new_game.addHumanMove(*it);
 
-    TreeNode* node_p = new MaxNode(new_game, min, value_m);
+    MaxNode tree_node(new_game, min, value_m);
 
-    int node_value = node_p->getValue();
-
-    delete node_p;
+    int node_value = tree_node.getValue();
 
     if ( node_value < value_m )
     {
@@ -118,11 +116,9 @@ void MaxNode::minimax(int min, int max)
 
     new_game.addComputerMove(*it);
 
-    TreeNode* node_p = new MinNode(new_game, value_m, max);
+    MinNode new_node(new_game, value_m, max);
 
-    int node_value = node_p->getValue();
-
-    delete node_p;
+    int node_value = new_node.getValue();
 
     if ( node_value > value_m )
     {

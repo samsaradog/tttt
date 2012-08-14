@@ -1,7 +1,7 @@
 // file View.cpp
 
 #include <cctype>
-//#include <cstdlib>
+#include <cstdlib>
 
 #include "Controller.h"
 #include "StepFactory.h"
