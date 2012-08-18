@@ -41,7 +41,7 @@ void StepTest::testStep1()
   bool keep_playing = step_m_p->makeMove(1, message, &game_m);
 
   CPPUNIT_ASSERT( message == 
-                 "Square 2 not available. Please choose another.\n" );
+                 "Square 1 not available. Please choose another.\n" );
 
   CPPUNIT_ASSERT( keep_playing );
 }
@@ -53,12 +53,12 @@ void StepTest::testStep1()
 
 void StepTest::testStep2()
 {
+  game_m.addHumanMove(1);
   game_m.addHumanMove(2);
-  game_m.addHumanMove(3);
 
   string message("");
 
-  bool keep_playing = step_m_p->makeMove(4, message, &game_m);
+  bool keep_playing = step_m_p->makeMove(3, message, &game_m);
 
   CPPUNIT_ASSERT( message == "The Human has won. Congratulations!\n");
 
@@ -77,7 +77,7 @@ void StepTest::testStep3()
 
   string message("");
 
-  bool keep_playing = step_m_p->makeMove(0, message, &game_m);
+  bool keep_playing = step_m_p->makeMove(9, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n");
 
@@ -114,18 +114,19 @@ void StepTest::testStep4()
 
 void StepTest::testStep5a()
 {
-  game_m.addComputerMove(0);
   game_m.addComputerMove(1);
-  game_m.addComputerMove(3);
-  game_m.addComputerMove(8);
+  game_m.addComputerMove(2);
+  game_m.addHumanMove(3);
 
-  game_m.addHumanMove(2);
   game_m.addHumanMove(4);
-  game_m.addHumanMove(7);
+  game_m.addComputerMove(5);
+  game_m.addComputerMove(6);
+
+  game_m.addHumanMove(9);
 
   string message("");
 
-  bool keep_playing = step_m_p->makeMove(5, message, &game_m);
+  bool keep_playing = step_m_p->makeMove(8, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n" );
 
@@ -160,18 +161,19 @@ void StepTest::testStep5b()
 
 void StepTest::testLastStepA()
 {
-  game_m.addComputerMove(1);
-  game_m.addComputerMove(4);
-  game_m.addComputerMove(6);
-  game_m.addComputerMove(8);
-
-  game_m.addHumanMove(2);
+  game_m.addComputerMove(2);
   game_m.addHumanMove(3);
-  game_m.addHumanMove(5);
+
+  game_m.addComputerMove(4);
+  game_m.addComputerMove(5);
+  game_m.addHumanMove(6);
+
+  game_m.addHumanMove(8);
+  game_m.addComputerMove(9);
 
   string message("");
 
-  bool keep_playing = step_m_p->makeMove(0, message, &game_m);
+  bool keep_playing = step_m_p->makeMove(1, message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n" );
 

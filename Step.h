@@ -9,7 +9,6 @@
 
 #include "Player.h"
 #include "Game.h"
-#include "Mapper.h"
 #include "FindWinner.h"
 
 using namespace std;
@@ -31,7 +30,6 @@ public:
 
 protected:
 
-  static Mapper  	mapper_m;
   static FindWinner*	finder_m_p;
   Step* next_m_p;
 };

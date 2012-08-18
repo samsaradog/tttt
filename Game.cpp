@@ -59,7 +59,7 @@ void Game::reset() throw()
 
   available_moves_m.clear();
 
-  for ( int i = 0; i <= 8; i++ )
+  for ( int i = 1; i <= 9; i++ )
     available_moves_m.insert(i);
 }
 

@@ -23,8 +23,7 @@ public:
 
   ViewTest() : game_m(),
                view_m(),
-               result_m(""),
-               mapper_m() {};
+               result_m("") {};
 
   ~ViewTest()
   {
@@ -44,8 +43,6 @@ private:
   View view_m;
 
   string result_m;
-
-  Mapper mapper_m;
 };
 
 #endif // VIEWTEST_H

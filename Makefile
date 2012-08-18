@@ -12,8 +12,8 @@ LFLAGS?=
 TESTAPP = tttttest
 APP = tttt
 MAINOBJ = tttt.o
-OBJS =  Mapper.o Game.o FindWinner.o Player.o View.o Controller.o StepFactory.o Steps.o TreeNode.o
-TESTOBJS = Main.o MapTest.o GameTest.o FindWinnerTest.o ViewTest.o PlayerTest.o ControllerTest.o StepTest.o TreeNodeTest.o
+OBJS =  Game.o FindWinner.o Player.o View.o Controller.o StepFactory.o Steps.o TreeNode.o
+TESTOBJS = Main.o GameTest.o FindWinnerTest.o ViewTest.o PlayerTest.o ControllerTest.o StepTest.o TreeNodeTest.o
 
 LIBS = -lstdc++ -ldl 
 
@@ -32,17 +32,15 @@ $(APP): $(OBJS) $(MAINOBJ)
 	g++ -c $(CFLAGS) $<
 
 tttt.o: tttt.cpp $(OBJS)
-Mapper.o: Mapper.cpp Mapper.h
 Game.o: Game.cpp Game.h Player.h
 FindWinner.o: FindWinner.cpp FindWinner.h Game.o Destroyer.h
 Player.o: Player.cpp Player.h
-View.o: View.cpp View.h Game.o Mapper.h
-Controller.o: Controller.cpp Controller.h Game.o Mapper.h
+View.o: View.cpp View.h Game.o 
+Controller.o: Controller.cpp Controller.h Game.o 
 StepFactory.o: StepFactory.cpp StepFactory.h Steps.h
 Steps.o: Steps.cpp Steps.h Step.h
 TreeNode.o: TreeNode.cpp TreeNode.h
 
-MapTest.o: MapTest.cpp MapTest.h Mapper.o
 GameTest.o: GameTest.cpp GameTest.h Game.o
 FindWinnerTest.o: FindWinnerTest.cpp FindWinnerTest.h FindWinner.o
 PlayerTest.o: PlayerTest.cpp PlayerTest.h Player.o

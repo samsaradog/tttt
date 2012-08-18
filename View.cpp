@@ -51,11 +51,9 @@ char View::getRepresentation(const int move,
 
   char return_value = '0' + move;
 
-  int translated_move = mapper_m.humanToComputer(move);
-
-  if ( human_p->hasMoved(translated_move))
+  if ( human_p->hasMoved(move))
     return_value = HUMAN_MARKER;
-  else if ( computer_p->hasMoved(translated_move) )
+  else if ( computer_p->hasMoved(move) )
     return_value = COMPUTER_MARKER;
 
   return return_value;

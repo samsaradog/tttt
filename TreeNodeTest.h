@@ -33,7 +33,7 @@ class TreeNodeTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST_SUITE_END();
 
 public:
-  TreeNodeTest() : game_m(), current_m_p(NULL) {};
+  TreeNodeTest() : game_m() {};
 
   ~TreeNodeTest();
 
@@ -62,7 +62,6 @@ protected:
 
 private:
   Game      game_m;
-  TreeNode* current_m_p;
 };
 
 

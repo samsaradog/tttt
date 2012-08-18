@@ -26,7 +26,7 @@ void PlayerTest::checkMoves()
   // and computer and then send a set of moves to the players
   // to find if they are present
 
-  for ( int i = 0; i < 4; i++ )
+  for ( int i = 1; i < 4; i++ )
     game_m.addHumanMove(i);
 
   IntSet moves;
@@ -60,9 +60,8 @@ void PlayerTest::checkMoves()
 
 void PlayerTest::checkMove()
 {
-  for ( int move = 0; move < 9; move++ )
+  for ( int move = 1; move <= 9; move++ )
   {
-
     game_m.addHumanMove(move);
     CPPUNIT_ASSERT( human_m_p->hasMoved(move) );
 

@@ -12,7 +12,6 @@
 #include <string>
 #include "Player.h"
 #include "Game.h"
-#include "Mapper.h"
 
 using namespace std;
 
@@ -20,7 +19,7 @@ class View
 {
 
 public:
-  View() : mapper_m() {};
+  View()  {};
   ~View() {};
 
   string show(const Player* human_p, 
@@ -33,7 +32,6 @@ private:
                          const Player* human_p,
                          const Player* computer_p);
 
-  Mapper mapper_m;
 };
 
 

@@ -83,11 +83,10 @@ bool Controller::addResponse(char input, string& message)
     case '9':
     {
        int move = input - '0';
-       int translated_move = mapper_m.humanToComputer(move);
 
        message.clear();
 
-       bool more_moves = step_m_p->makeMove(translated_move,
+       bool more_moves = step_m_p->makeMove(move,
                                             message,
                                             &game_m);
 

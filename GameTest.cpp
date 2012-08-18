@@ -44,13 +44,13 @@ void GameTest::isMoveAvailable(void)
 {
   CPPUNIT_ASSERT(game_m.moveAvailable());
 
-  for ( int i = 0; i < 8; i++ )
+  for ( int i = 1; i < 9; i++ )
     game_m.addHumanMove(i);
 
   CPPUNIT_ASSERT(game_m.moveAvailable());
-  CPPUNIT_ASSERT(game_m.moveAvailable(8));
+  CPPUNIT_ASSERT(game_m.moveAvailable(9));
 
-  game_m.addComputerMove(8);
+  game_m.addComputerMove(9);
 
   CPPUNIT_ASSERT(!game_m.moveAvailable());
 
@@ -60,7 +60,7 @@ void GameTest::isMoveAvailable(void)
 
 void GameTest::availableMoves(void)
 {
-  for ( int i = 0; i < 9; i += 2 )
+  for ( int i = 2; i < 9; i += 2 )
     game_m.addHumanMove(i);
 
   IntSet a_set = game_m.getAvailable();
@@ -109,14 +109,14 @@ void GameTest::isLeafTest(void)
 {
   // build a draw game
   buildDrawGame();
-  
+
   CPPUNIT_ASSERT( game_m.isLeaf() );
 
   game_m.reset();
 
   // Now a computer win
 
-  for ( int i = 0; i < 3; i++ )
+  for ( int i = 1; i < 4; i++ )
     game_m.addComputerMove(i);
 
   CPPUNIT_ASSERT( game_m.isLeaf() );
@@ -125,7 +125,7 @@ void GameTest::isLeafTest(void)
 
   // Now a human win
 
-  for ( int i = 0; i < 3; i++ )
+  for ( int i = 1; i < 4; i++ )
     game_m.addHumanMove(i);
 
   CPPUNIT_ASSERT( game_m.isLeaf() );
@@ -141,11 +141,11 @@ void GameTest::isNotLeafTest()
 
   // add a few, but not enough to make a winner or draw
   
-  game_m.addHumanMove(0);
-  game_m.addHumanMove(2);
+  game_m.addHumanMove(1);
+  game_m.addHumanMove(3);
 
-  game_m.addComputerMove(1);
-  game_m.addComputerMove(8);
+  game_m.addComputerMove(2);
+  game_m.addComputerMove(5);
 
   CPPUNIT_ASSERT( !game_m.isLeaf() );
 }
@@ -154,7 +154,7 @@ void GameTest::isNotLeafTest()
 
 void GameTest::nodeValueWin()
 {
-  for ( int i = 0; i < 3; i++ )
+  for ( int i = 1; i < 4; i++ )
     game_m.addComputerMove(i);
 
   CPPUNIT_ASSERT( 1 == game_m.getValue() );
@@ -164,7 +164,7 @@ void GameTest::nodeValueWin()
 
 void GameTest::nodeValueLose()
 {
-  for ( int i = 0; i < 3; i++ )
+  for ( int i = 1; i < 4; i++ )
     game_m.addHumanMove(i);
 
   CPPUNIT_ASSERT( -1 == game_m.getValue() );
@@ -187,16 +187,17 @@ void GameTest::nodeValueDraw()
 
 void GameTest::buildDrawGame()
 {
-  game_m.addComputerMove(2);
-  game_m.addComputerMove(4);
-  game_m.addComputerMove(7);
-  game_m.addComputerMove(8);
-
-  game_m.addHumanMove(0);
   game_m.addHumanMove(1);
-  game_m.addHumanMove(3);
-  game_m.addHumanMove(5);
+  game_m.addHumanMove(2);
+  game_m.addComputerMove(3);
+
+  game_m.addComputerMove(4);
+  game_m.addComputerMove(5);
   game_m.addHumanMove(6);
+
+  game_m.addHumanMove(7);
+  game_m.addHumanMove(8);
+  game_m.addComputerMove(9);
 }
 
 //---------------------------------------------------------------

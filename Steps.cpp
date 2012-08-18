@@ -7,7 +7,6 @@
 
 // Declare the static members of Step
 
-Mapper Step::mapper_m;
 FindWinner* Step::finder_m_p = FindWinner::Instance();
 
 //---------------------------------------------------------------
@@ -25,8 +24,7 @@ bool Step1::makeMove(int human_move,
   {
     return_value = true;
 
-    int translated_move = mapper_m.computerToHuman(human_move);
-    char move_char = '0' + translated_move;
+    char move_char = '0' + human_move;
 
     message += "Square ";
     message += move_char;

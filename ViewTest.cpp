@@ -49,8 +49,8 @@ void ViewTest::showEmpty()
 
 void ViewTest::showOneMove()
 {
-  game_m.addHumanMove(mapper_m.humanToComputer(6));
-  game_m.addComputerMove(mapper_m.humanToComputer(8));
+  game_m.addHumanMove(6);
+  game_m.addComputerMove(8);
 
   result_m.replace(VT_SIX_POS, 1, 1, 'X');
   result_m.replace(VT_EIGHT_POS, 1, 1, 'O');

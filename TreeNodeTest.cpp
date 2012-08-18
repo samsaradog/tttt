@@ -23,49 +23,43 @@ void TreeNodeTest::setUp()
 
 void TreeNodeTest::tearDown()
 {
-  if ( NULL != current_m_p )
-  {
-    delete current_m_p;
-    current_m_p = NULL;
-  }
 }
 
 //---------------------------------------------------------------
 
 void TreeNodeTest::minWinLeaf()
 {
-  for ( int i = 0; i < 3; i++ )
+  for ( int i = 1; i <= 3; i++ )
     game_m.addHumanMove(i);
     
-  current_m_p = new MinNode(game_m);
+  MinNode current(game_m);
 
-  CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
-  CPPUNIT_ASSERT( -1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( -1 == current.getMove() );
+  CPPUNIT_ASSERT( -1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
 
 void TreeNodeTest::maxWinLeaf()
 {
-  for ( int i = 0; i < 3; i++ )
+  for ( int i = 1; i <= 3; i++ )
     game_m.addComputerMove(i);
     
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
-  CPPUNIT_ASSERT(  1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( -1 == current.getMove() );
+  CPPUNIT_ASSERT(  1 == current.getValue() );
 
   game_m.reset();
 
-  game_m.addComputerMove(3);
-  game_m.addComputerMove(7);
-  game_m.addComputerMove(8);
+  game_m.addComputerMove(4);
+  game_m.addComputerMove(5);
+  game_m.addComputerMove(6);
 
-  delete current_m_p;
-  current_m_p = new MaxNode(game_m);
+  MaxNode current2(game_m);
 
-  CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
-  CPPUNIT_ASSERT(  1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( -1 == current2.getMove() ); 
+  CPPUNIT_ASSERT(  1 == current2.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -79,21 +73,22 @@ void TreeNodeTest::minDrawLeaf()
 // ----------
 //  X | O | X
 
-  game_m.addComputerMove(0);
-  game_m.addComputerMove(2);
-  game_m.addComputerMove(5);
-  game_m.addComputerMove(7);
+  game_m.addComputerMove(1);
+  game_m.addHumanMove(2);
+  game_m.addComputerMove(3);
 
-  game_m.addHumanMove(1);
-  game_m.addHumanMove(3);
-  game_m.addHumanMove(4);
+  game_m.addComputerMove(4);
+  game_m.addHumanMove(5);
   game_m.addHumanMove(6);
-  game_m.addHumanMove(8);
 
-  current_m_p = new MinNode(game_m);
+  game_m.addHumanMove(7);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(9);
 
-  CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
-  CPPUNIT_ASSERT(  0 == current_m_p->getValue() );
+  MinNode current(game_m);
+
+  CPPUNIT_ASSERT( -1 == current.getMove() );
+  CPPUNIT_ASSERT(  0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -107,21 +102,22 @@ void TreeNodeTest::maxDrawLeaf()
 // ----------
 //  X | O | X
 
-  game_m.addComputerMove(0);
-  game_m.addComputerMove(2);
-  game_m.addComputerMove(5);
-  game_m.addComputerMove(7);
+  game_m.addComputerMove(1);
+  game_m.addHumanMove(2);
+  game_m.addComputerMove(3);
 
-  game_m.addHumanMove(1);
-  game_m.addHumanMove(3);
-  game_m.addHumanMove(4);
+  game_m.addComputerMove(4);
+  game_m.addHumanMove(5);
   game_m.addHumanMove(6);
-  game_m.addHumanMove(8);
 
-  current_m_p = new MaxNode(game_m);
+  game_m.addHumanMove(7);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(9);
 
-  CPPUNIT_ASSERT( -1 == current_m_p->getMove() );
-  CPPUNIT_ASSERT(  0 == current_m_p->getValue() );
+  MaxNode current(game_m);
+
+  CPPUNIT_ASSERT( -1 == current.getMove() );
+  CPPUNIT_ASSERT(  0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -135,20 +131,21 @@ void TreeNodeTest::minWinDepth1()
 // ----------
 //    | X | O
 
-  game_m.addHumanMove(0);
-  game_m.addHumanMove(2);
-  game_m.addHumanMove(5);
-  game_m.addHumanMove(7);
+  game_m.addHumanMove(1);
+  game_m.addComputerMove(2);
+  game_m.addHumanMove(3);
 
-  game_m.addComputerMove(1);
-  game_m.addComputerMove(3);
-  game_m.addComputerMove(4);
-  game_m.addComputerMove(8);
+  game_m.addHumanMove(4);
+  game_m.addComputerMove(5);
+  game_m.addComputerMove(6);
 
-  current_m_p = new MinNode(game_m);
+  game_m.addHumanMove(8);
+  game_m.addComputerMove(9);
 
-  CPPUNIT_ASSERT(  6 == current_m_p->getMove() );
-  CPPUNIT_ASSERT( -1 == current_m_p->getValue() );
+  MinNode current(game_m);
+
+  CPPUNIT_ASSERT(  7 == current.getMove() );
+  CPPUNIT_ASSERT( -1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -162,20 +159,21 @@ void TreeNodeTest::maxWinDepth1()
 // ----------
 //    | 0 | X
 
-  game_m.addComputerMove(0);
-  game_m.addComputerMove(2);
-  game_m.addComputerMove(5);
-  game_m.addComputerMove(7);
+  game_m.addComputerMove(1);
+  game_m.addHumanMove(2);
+  game_m.addComputerMove(3);
 
-  game_m.addHumanMove(1);
-  game_m.addHumanMove(3);
-  game_m.addHumanMove(4);
-  game_m.addHumanMove(8);
+  game_m.addComputerMove(4);
+  game_m.addHumanMove(5);
+  game_m.addHumanMove(6);
 
-  current_m_p = new MaxNode(game_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(9);
 
-  CPPUNIT_ASSERT( 6 == current_m_p->getMove() );
-  CPPUNIT_ASSERT( 1 == current_m_p->getValue() );
+  MaxNode current(game_m);
+
+  CPPUNIT_ASSERT( 7 == current.getMove() );
+  CPPUNIT_ASSERT( 1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -189,20 +187,21 @@ void TreeNodeTest::minDrawDepth1()
 // ----------
 //    | 0 | X
 
-  game_m.addComputerMove(0);
-  game_m.addComputerMove(2);
-  game_m.addComputerMove(5);
-  game_m.addComputerMove(7);
+  game_m.addComputerMove(1);
+  game_m.addHumanMove(2);
+  game_m.addComputerMove(3);
 
-  game_m.addHumanMove(1);
-  game_m.addHumanMove(3);
-  game_m.addHumanMove(4);
-  game_m.addHumanMove(8);
+  game_m.addComputerMove(4);
+  game_m.addHumanMove(5);
+  game_m.addHumanMove(6);
 
-  current_m_p = new MinNode(game_m);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(9);
 
-  CPPUNIT_ASSERT( 6 == current_m_p->getMove() );
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  MinNode current(game_m);
+
+  CPPUNIT_ASSERT( 7 == current.getMove() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -216,20 +215,21 @@ void TreeNodeTest::maxDrawDepth1()
 // ----------
 //    | X | O
 
-  game_m.addHumanMove(0);
-  game_m.addHumanMove(2);
-  game_m.addHumanMove(5);
-  game_m.addHumanMove(7);
+  game_m.addHumanMove(1);
+  game_m.addComputerMove(2);
+  game_m.addHumanMove(3);
 
-  game_m.addComputerMove(1);
-  game_m.addComputerMove(3);
-  game_m.addComputerMove(4);
-  game_m.addComputerMove(8);
+  game_m.addHumanMove(4);
+  game_m.addComputerMove(5);
+  game_m.addComputerMove(6);
 
-  current_m_p = new MaxNode(game_m);
+  game_m.addHumanMove(8);
+  game_m.addComputerMove(9);
 
-  CPPUNIT_ASSERT( 6 == current_m_p->getMove() );
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  MaxNode current(game_m);
+
+  CPPUNIT_ASSERT( 7 == current.getMove() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -243,23 +243,24 @@ void TreeNodeTest::minLoseDepth2()
 // ----------
 //  O | X | O
 
-  game_m.addHumanMove(1);
-  game_m.addHumanMove(3);
-  game_m.addHumanMove(5);
+  game_m.addHumanMove(2);
 
   game_m.addComputerMove(4);
-  game_m.addComputerMove(6);
+  game_m.addComputerMove(5);
+  game_m.addHumanMove(6);
+
   game_m.addComputerMove(7);
-  game_m.addComputerMove(8);
+  game_m.addHumanMove(8);
+  game_m.addComputerMove(9);
 
-  current_m_p = new MinNode(game_m);
+  MinNode current(game_m);
 
-  int new_move  = current_m_p->getMove();
+  int new_move  = current.getMove();
 
-  bool move_result = ( ( 0 == new_move ) || ( 2 == new_move) );
+  bool move_result = ( ( 1 == new_move ) || ( 3 == new_move) );
 
   CPPUNIT_ASSERT( move_result );
-  CPPUNIT_ASSERT( 1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -273,23 +274,24 @@ void TreeNodeTest::maxLoseDepth2()
 // ----------
 //  X | O | X
 
-  game_m.addComputerMove(1);
-  game_m.addComputerMove(3);
-  game_m.addComputerMove(5);
+  game_m.addComputerMove(2);
 
   game_m.addHumanMove(4);
-  game_m.addHumanMove(6);
+  game_m.addHumanMove(5);
+  game_m.addComputerMove(6);
+
   game_m.addHumanMove(7);
-  game_m.addHumanMove(8);
+  game_m.addComputerMove(8);
+  game_m.addHumanMove(9);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  int new_move  = current_m_p->getMove();
+  int new_move  = current.getMove();
 
-  bool move_result = ( ( 0 == new_move ) || ( 2 == new_move) );
+  bool move_result = ( ( 1 == new_move ) || ( 3 == new_move) );
 
   CPPUNIT_ASSERT( move_result );
-  CPPUNIT_ASSERT( -1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( -1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -303,15 +305,15 @@ void TreeNodeTest::maxDrawDepth5()
 // ----------
 //  O |   |  
 
-  game_m.addHumanMove(7);
-  game_m.addHumanMove(8);
+  game_m.addHumanMove(4);
+  game_m.addHumanMove(5);
 
-  game_m.addComputerMove(6);
+  game_m.addComputerMove(7);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 3 == current_m_p->getMove() );
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 6 == current.getMove() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -330,14 +332,14 @@ void TreeNodeTest::maxWinDepth5()
   // still win. Since the square it picks is random, we
   // can't look for it specifically
 
-  game_m.addHumanMove(1);
-  game_m.addHumanMove(4);
-  game_m.addComputerMove(8);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(9);
+  game_m.addComputerMove(5);
   game_m.addComputerMove(6);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -351,12 +353,12 @@ void TreeNodeTest::maxWinDepth7()
 // ----------
 //    |   |  
 
-  game_m.addHumanMove(7);
-  game_m.addComputerMove(8);
+  game_m.addHumanMove(4);
+  game_m.addComputerMove(5);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 1 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 1 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -370,14 +372,14 @@ void TreeNodeTest::maxDrawDepth6()
 // ----------
 //    |   |  
 
-  game_m.addHumanMove(8);
-  game_m.addHumanMove(1);
-  game_m.addComputerMove(0);
+  game_m.addHumanMove(2);
+  game_m.addHumanMove(5);
+  game_m.addComputerMove(1);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
-  CPPUNIT_ASSERT( 5 == current_m_p->getMove() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
+  CPPUNIT_ASSERT( 8 == current.getMove() );
 }
 
 //---------------------------------------------------------------
@@ -391,12 +393,12 @@ void TreeNodeTest::maxDrawDepth7()
 // ----------
 //    |   |  
 
-  game_m.addHumanMove(8);
-  game_m.addComputerMove(1);
+  game_m.addHumanMove(5);
+  game_m.addComputerMove(2);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -410,11 +412,11 @@ void TreeNodeTest::maxDrawDepth8()
 // ----------
 //    |   |  
 
-  game_m.addHumanMove(8);
+  game_m.addHumanMove(5);
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
 }
 
 //---------------------------------------------------------------
@@ -428,9 +430,9 @@ void TreeNodeTest::maxDrawDepth9()
 // ----------
 //    |   |  
 
-  current_m_p = new MaxNode(game_m);
+  MaxNode current(game_m);
 
-  CPPUNIT_ASSERT( 0 == current_m_p->getValue() );
+  CPPUNIT_ASSERT( 0 == current.getValue() );
 }
 
 //---------------------------------------------------------------

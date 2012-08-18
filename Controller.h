@@ -11,7 +11,6 @@
 #include <string>
 #include "Player.h"
 #include "Game.h"
-#include "Mapper.h"
 #include "View.h"
 #include "Step.h"
 
@@ -37,7 +36,6 @@ public:
 
 private:
 
-  Mapper 	mapper_m;
   Game 		game_m;
 
   const Player* human_m_p;
