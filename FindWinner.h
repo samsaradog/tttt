@@ -29,20 +29,14 @@ public:
 
   bool hasWinner(const Player* player_p) const;
 
-  // returns 0 if there is no winning move
-  int winningMove(const Game* game_p, const Player* player_p) const;
-
 private:
   FindWinner();
   ~FindWinner();
 
-  friend class Destroyer<FindWinner>;
-
   IntSetSet winningMoves_m;
-  IntSetSetVector blockedMoves_m;
-
   void buildWinningMovesSet();
-  void buildBlockedMovesVector();
+
+  friend class Destroyer<FindWinner>;
 
   static FindWinner* instance_m_p;
   static Destroyer<FindWinner> destroyer_m;

@@ -18,9 +18,6 @@ class FindWinnerTest : public CPPUNIT_NS::TestFixture
   CPPUNIT_TEST( allHumanWinners );
   CPPUNIT_TEST( computerWinner );
   CPPUNIT_TEST( allComputerWinners );
-  CPPUNIT_TEST( makeWinner );
-  CPPUNIT_TEST( checkBlockedMoves );
-  CPPUNIT_TEST( checkNotBlockedMoves );
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -37,9 +34,6 @@ protected:
   void allHumanWinners();
   void computerWinner();
   void allComputerWinners();
-  void makeWinner();
-  void checkBlockedMoves();
-  void checkNotBlockedMoves();
 
 private:
   Game       game_m;
