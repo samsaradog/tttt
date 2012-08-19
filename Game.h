@@ -51,6 +51,9 @@ public:
   // Returns value of the game
   int getValue();
 
+  // Returns number of possible moves in the game
+  int getSize() const { return game_size_m; };
+
 private:
 
   IntSet available_moves_m;
@@ -62,6 +65,8 @@ private:
 
   // Throws an exception if the move is not available
   void checkAvailableMoves(int move) throw (invalid_argument);
+
+  const static int game_size_m = 9;
 };
 
 

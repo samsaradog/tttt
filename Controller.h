@@ -16,12 +16,6 @@
 
 using namespace std;
 
-const string CT_MOVE_MESSAGE = "Please choose 1-9 to move,\nY for a new game,\nor Q to quit.\n";
-
-const string CT_BYE_MESSAGE = "Thanks for playing!\n";
-
-const string CT_BAD_ENTRY_MESSAGE = "Invalid input\n";
-
 class Controller
 {
 
@@ -33,6 +27,11 @@ public:
   // to the human playing the game.
 
   bool addResponse(char input, string& message);
+
+  const string& getMoveMessage() const { return move_message_m; };
+  const string& getByeMessage()  const { return bye_message_m; };
+
+  const string& getBadEntryMessage() const { return bad_entry_message_m; };
 
 private:
 
@@ -46,6 +45,10 @@ private:
   bool 		continue_game_m;
 
   Step*		step_m_p;
+
+  const static string move_message_m;
+  const static string bye_message_m;
+  const static string bad_entry_message_m;
 };
 
 

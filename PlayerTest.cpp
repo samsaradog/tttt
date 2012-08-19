@@ -60,7 +60,7 @@ void PlayerTest::checkMoves()
 
 void PlayerTest::checkMove()
 {
-  for ( int move = 1; move <= 9; move++ )
+  for ( int move = 1; move <= game_m.getSize(); move++ )
   {
     game_m.addHumanMove(move);
     CPPUNIT_ASSERT( human_m_p->hasMoved(move) );

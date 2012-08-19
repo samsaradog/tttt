@@ -9,34 +9,29 @@
 
 // Define class static variables
 
+//---------------------------------------------------------------
+
 FindWinner* FindWinner::instance_m_p = 0;
 Destroyer<FindWinner> FindWinner::destroyer_m;
 
 //---------------------------------------------------------------
 
-// Array to define what sets of moves win a game
-
-const int WINNER_ARRAY_COLS = 3;
-
-//---------------------------------------------------------------
-
-int winningMovesArray_m[][WINNER_ARRAY_COLS] = {
-	{ 1, 2, 3 },
-	{ 4, 5, 6 },
-	{ 7, 8, 9 },
-	{ 1, 4, 7 },
-	{ 2, 5, 8 },
-	{ 3, 6, 9 },
-	{ 1, 5, 9 },
-	{ 3, 5, 7 }  };
-
-const int WINNER_ARRAY_ROWS = sizeof(winningMovesArray_m)/
-                              (sizeof(int)*WINNER_ARRAY_COLS);
+const int 
+FindWinner::winning_moves_array_m[][winner_array_cols_m] = {
+        { 1, 2, 3 },
+        { 4, 5, 6 },
+        { 7, 8, 9 },
+        { 1, 4, 7 },
+        { 2, 5, 8 },
+        { 3, 6, 9 },
+        { 1, 5, 9 },
+        { 3, 5, 7 }  };
 
 //---------------------------------------------------------------
 
-// This will come in handy for building the vector
-#define FW_POSSIBLE_MOVES 9
+const int 
+FindWinner::winner_array_rows_m = sizeof(winning_moves_array_m)/
+                                   (sizeof(int)*winner_array_cols_m);
 
 //---------------------------------------------------------------
 
@@ -89,11 +84,11 @@ void FindWinner::buildWinningMovesSet()
 
   moves.clear();
 
-  for ( int row = 0; row < WINNER_ARRAY_ROWS; row++ )
+  for ( int row = 0; row < winner_array_rows_m; row++ )
   {
-    for ( int col = 0; col < WINNER_ARRAY_COLS; col++ )
+    for ( int col = 0; col < winner_array_cols_m; col++ )
     {
-      moves.insert(winningMovesArray_m[row][col]);
+      moves.insert(winning_moves_array_m[row][col]);
     }
    
     winningMoves_m.insert(moves);

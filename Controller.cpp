@@ -9,6 +9,19 @@
 
 //---------------------------------------------------------------
 
+// Initialize static constants
+
+//---------------------------------------------------------------
+
+const string Controller::move_message_m =         
+	"Please choose 1-9 to move,\nY for a new game,\nor Q to quit.\n";
+
+const string Controller::bye_message_m = "Thanks for playing!\n";
+
+const string Controller::bad_entry_message_m = "Invalid input\n";
+
+//---------------------------------------------------------------
+
 Controller::Controller() : game_m(),
                            human_m_p(game_m.getHuman()), 
                            computer_m_p(game_m.getComputer()), 
@@ -68,7 +81,7 @@ bool Controller::addResponse(char input, string& message)
       }
 
       message += view_m.show(human_m_p, computer_m_p, &game_m);
-      message += CT_MOVE_MESSAGE;
+      message += getMoveMessage();
     }
     break;
 
@@ -93,7 +106,7 @@ bool Controller::addResponse(char input, string& message)
        message += view_m.show(human_m_p, computer_m_p, &game_m);
 
        if ( more_moves )
-         message += CT_MOVE_MESSAGE;
+         message += getMoveMessage();
        else
          message += "Play again? (Y/N)\n";
     }
@@ -102,15 +115,15 @@ bool Controller::addResponse(char input, string& message)
     case 'Q':
     case 'N':
     {
-      message = CT_BYE_MESSAGE;
+      message = getByeMessage();
       return_value = false;
     }
     break;
 
     default:
     {
-      message = CT_BAD_ENTRY_MESSAGE;
-      message += CT_MOVE_MESSAGE;
+      message = getBadEntryMessage();
+      message += getMoveMessage();
       return_value = true;
     }
     break;

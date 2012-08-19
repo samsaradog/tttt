@@ -15,7 +15,6 @@ class GameTest : public CPPUNIT_NS::TestFixture
 {
   CPPUNIT_TEST_SUITE( GameTest );
   CPPUNIT_TEST( addMoves );
-//  CPPUNIT_TEST( checkMoves );
   CPPUNIT_TEST( isMoveAvailable );
   CPPUNIT_TEST( availableMoves );
   CPPUNIT_TEST( equalityTestA );
@@ -40,7 +39,6 @@ public:
 
 protected:
   void addMoves();
-//  void checkMoves();
   void isMoveAvailable();
   void availableMoves();
   void equalityTestA();

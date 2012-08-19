@@ -44,13 +44,15 @@ void GameTest::isMoveAvailable(void)
 {
   CPPUNIT_ASSERT(game_m.moveAvailable());
 
-  for ( int i = 1; i < 9; i++ )
+  const int game_size = game_m.getSize();
+
+  for ( int i = 1; i < game_size; i++ )
     game_m.addHumanMove(i);
 
   CPPUNIT_ASSERT(game_m.moveAvailable());
-  CPPUNIT_ASSERT(game_m.moveAvailable(9));
+  CPPUNIT_ASSERT(game_m.moveAvailable(game_size));
 
-  game_m.addComputerMove(9);
+  game_m.addComputerMove(game_size);
 
   CPPUNIT_ASSERT(!game_m.moveAvailable());
 
@@ -60,7 +62,7 @@ void GameTest::isMoveAvailable(void)
 
 void GameTest::availableMoves(void)
 {
-  for ( int i = 2; i < 9; i += 2 )
+  for ( int i = 2; i < game_m.getSize(); i += 2 )
     game_m.addHumanMove(i);
 
   IntSet a_set = game_m.getAvailable();

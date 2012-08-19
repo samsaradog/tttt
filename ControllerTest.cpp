@@ -19,6 +19,8 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ControllerTest );
 
 void ControllerTest::setUp()
 {
+  result_m.clear();
+
   result_m  = " 1 | 2 | 3 \n";
   result_m += "-----------\n";
   result_m += " 4 | 5 | 6 \n";
@@ -40,8 +42,8 @@ void ControllerTest::initialGame()
 
   bool keep_playing = controller_m.addResponse('y', result);
 
-  result_m += CT_MOVE_MESSAGE;
-  
+  result_m += controller_m.getMoveMessage();
+
   CPPUNIT_ASSERT( result_m == result );
   CPPUNIT_ASSERT( keep_playing );
 }
@@ -54,7 +56,7 @@ void ControllerTest::quitGame()
 
   bool keep_playing = controller_m.addResponse('q', result);
 
-  CPPUNIT_ASSERT( CT_BYE_MESSAGE == result );
+  CPPUNIT_ASSERT( controller_m.getByeMessage() == result );
   CPPUNIT_ASSERT( !keep_playing );
 }
 
@@ -66,7 +68,8 @@ void ControllerTest::badEntry()
 
   bool keep_playing = controller_m.addResponse('%', result);
 
-  string expected_result = CT_BAD_ENTRY_MESSAGE + CT_MOVE_MESSAGE;
+  string expected_result = controller_m.getBadEntryMessage() +
+                           controller_m.getMoveMessage();
 
   CPPUNIT_ASSERT( expected_result == result );
   CPPUNIT_ASSERT( keep_playing );

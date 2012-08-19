@@ -72,12 +72,12 @@ void StepTest::testStep2()
 
 void StepTest::testStep3()
 {
-  for ( int i = 1; i < 9; i++ )
+  for ( int i = 1; i < game_m.getSize(); i++ )
     game_m.addComputerMove(i);
 
   string message("");
 
-  bool keep_playing = step_m_p->makeMove(9, message, &game_m);
+  bool keep_playing = step_m_p->makeMove(game_m.getSize(), message, &game_m);
 
   CPPUNIT_ASSERT( message == "Draw Game.\n");
 

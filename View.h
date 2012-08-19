@@ -30,7 +30,8 @@ private:
 
   char getRepresentation(const int move,
                          const Player* human_p,
-                         const Player* computer_p);
+                         const Player* computer_p,
+                         const Game*   game_p);
 
 };
 
