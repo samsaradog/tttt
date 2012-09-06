@@ -5,17 +5,19 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION( FindWinnerTest );
 
-const int WINNING_MOVE_SIZE = 3;
+const int WINNING_MOVE_SIZE = 4;
 
 int winningMoveCombinations[][WINNING_MOVE_SIZE] = {
-        { 1, 2, 3 },
-        { 4, 5, 6 },
-        { 7, 8, 9 },
-        { 1, 4, 7 },
-        { 2, 5, 8 },
-        { 3, 6, 9 },
-        { 1, 5, 9 },
-        { 3, 5, 7 }  };
+        {  0,  1,  2,  3 },
+        {  4,  5,  6,  7 },
+        {  8,  9, 10, 11 },
+        { 12, 13, 14, 15 },
+        {  0,  4,  8, 12 },
+        {  1,  5,  9, 13 },
+        {  2,  6, 10, 14 },
+        {  3,  7, 11, 15 },
+        {  0,  5, 10, 15 },
+        {  3,  6,  9, 12 }  };
 
 const int WINNING_MOVE_COUNT = sizeof(winningMoveCombinations)/
                               (sizeof(int)*WINNING_MOVE_SIZE);
@@ -37,6 +39,7 @@ void FindWinnerTest::tearDown()
 
 void FindWinnerTest::humanWinner()
 {
+  game_m.addHumanMove(0);
   game_m.addHumanMove(1);
   game_m.addHumanMove(2);
   game_m.addComputerMove(6);
@@ -69,6 +72,7 @@ void FindWinnerTest::allHumanWinners()
 
 void FindWinnerTest::computerWinner()
 {
+  game_m.addComputerMove(0);
   game_m.addComputerMove(1);
   game_m.addComputerMove(2);
   game_m.addHumanMove(6);

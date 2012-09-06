@@ -16,13 +16,14 @@ class ControllerTest : public CPPUNIT_NS::TestFixture
 {
   CPPUNIT_TEST_SUITE( ControllerTest );
 //  CPPUNIT_TEST( initialGame );
+//  CPPUNIT_TEST( oneMove );
   CPPUNIT_TEST( quitGame );
   CPPUNIT_TEST( badEntry );
   CPPUNIT_TEST_SUITE_END();
 
 public:
 
-  ControllerTest() : controller_m(), result_m() {};
+  ControllerTest() : controller_m() {};
 
   ~ControllerTest() {}
 
@@ -31,13 +32,12 @@ public:
 
 protected:
   void initialGame();
+  void oneMove();
   void quitGame();
   void badEntry();
 
 private:
   Controller controller_m;
-
-  string result_m;
 };
 
 #endif // CONTROLLER_TEST_H

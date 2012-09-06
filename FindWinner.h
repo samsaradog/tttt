@@ -43,7 +43,7 @@ private:
 
   // Give this a value here so we can use it for the array
 
-  static const int winner_array_cols_m = 3;
+  static const int winner_array_cols_m = 4;
 
   static const int winning_moves_array_m[][winner_array_cols_m];
 

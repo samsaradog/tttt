@@ -3,7 +3,7 @@
 #include <cppunit/config/SourcePrefix.h>
 #include "GameTest.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION( GameTest );
+//CPPUNIT_TEST_SUITE_REGISTRATION( GameTest );
 
 //---------------------------------------------------------------
 

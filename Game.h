@@ -66,7 +66,7 @@ private:
   // Throws an exception if the move is not available
   void checkAvailableMoves(int move) throw (invalid_argument);
 
-  const static int game_size_m = 9;
+  const static int game_size_m = 16;
 };
 
 

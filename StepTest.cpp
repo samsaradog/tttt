@@ -4,7 +4,7 @@
 #include "StepTest.h"
 #include "StepFactory.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION( StepTest );
+//CPPUNIT_TEST_SUITE_REGISTRATION( StepTest );
 
 //---------------------------------------------------------------
 

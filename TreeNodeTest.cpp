@@ -3,7 +3,7 @@
 #include <cppunit/config/SourcePrefix.h>
 #include "TreeNodeTest.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION( TreeNodeTest );
+//CPPUNIT_TEST_SUITE_REGISTRATION( TreeNodeTest );
 
 //---------------------------------------------------------------
 

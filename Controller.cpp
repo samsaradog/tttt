@@ -14,7 +14,7 @@
 //---------------------------------------------------------------
 
 const string Controller::move_message_m =         
-	"Please choose 1-9 to move,\nY for a new game,\nor Q to quit.\n";
+	"Please choose 0-F to move,\nY for a new game,\nor Q to quit.\n";
 
 const string Controller::bye_message_m = "Thanks for playing!\n";
 
@@ -85,6 +85,7 @@ bool Controller::addResponse(char input, string& message)
     }
     break;
 
+    case '0':
     case '1':
     case '2':
     case '3':
@@ -94,8 +95,23 @@ bool Controller::addResponse(char input, string& message)
     case '7':
     case '8':
     case '9':
+    case 'A':
+    case 'B':
+    case 'C':
+    case 'D':
+    case 'E':
+    case 'F':
     {
-       int move = input - '0';
+       int move = -1;
+
+       if ( input < 'A' )
+       {
+         move = input - '0';
+       }
+       else
+       {
+         move = input - 'A';
+       }
 
        message.clear();
 
