@@ -1,26 +1,28 @@
-This project implements the classic Tic-Tac-Toe game using a simple, command
-line interface. Compiling and running it should be possible on any standard
-Un*x implementation that has a g++ compiler and STL available.
+This project implements the classic Tic-Tac-Toe game using a simple, 
+command line interface. 
+
+=====================================
+
+Building the Game
 
 You will need to have cppunit installed, and LD_LIBRARY_PATH set to point
 to where its shared object file lives.
+
+Compiling and running this code should be possible on any standard
+Un*x implementation that has a g++ compiler and STL available.
+It has been tested already on MacOS and Ubuntu.
 
 =====================================
 
 TTTT Game Design
 
 This implementation uses a min/max tree with alpha-beta pruning
-to determine the computer move. Unlike the earlier rule-based
-implementation, this one should be expandable into larger game
-grids: 4x4 or even 3D.
+to determine the computer move. It should be expandable into larger 
+game grids: 4x4 or even 3D.
 
-The computer is now more patient in its move selection. Instead of 
-looking for a quick win, it just looks for a move that will lead to 
-a win (or draw) eventually.
-
-Many of the components of the rule-based game were reusable,
-such as the Game class to hold the current state of the game,
-and the FindWinner object to determine whether the game is in a
-winning configuration.
+The computer is patient in its move selection. Instead of looking 
+for a quick win, it just looks for a move that will lead to 
+a win (or draw) eventually. It will also tease you when it knows
+that it is going to win.
 
 Enjoy!
